@@ -19,8 +19,8 @@ public class Utils {
         return response.body().string();
     }
 
-    public static String makeMatchListReq(final Team team){
-        String outputString = "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/event/" + team.getTBAEventID() + "/matches";
+    public static String makeMatchListReq(final Team team, final int eventIndex){
+        String outputString = "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/event/" + team.getTBAEventID(eventIndex) + "/matches";
         return outputString;
     }
 
@@ -29,8 +29,8 @@ public class Utils {
         return outputString;
     }
 
-    public static String makeMatchReq(final Team team, final String matchID){
-        String outputString = "https://www.thebluealliance.com/api/v3/match/" + team.getTBAEventID() + "_" + matchID;
+    public static String makeMatchReq(final Team team, final String matchID, final int eventIndex){
+        String outputString = "https://www.thebluealliance.com/api/v3/match/" + team.getTBAEventID(eventIndex) + "_" + matchID;
         return outputString;
     }
 }

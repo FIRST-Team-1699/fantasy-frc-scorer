@@ -32,7 +32,7 @@ public class Team {
     public String getTBARequestID(){
         return "frc" + teamNumber;
     }
-    public String getTBAEventID(){
-        return events.get(events.size() - 1);
+    public String getTBAEventID(int index){
+        return events.get(index);
     }
 }
