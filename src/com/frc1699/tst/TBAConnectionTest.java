@@ -10,7 +10,8 @@ public class TBAConnectionTest {
     public static void main(String[] args){
         Team team = new Team("254");
         try {
-            System.out.println(Utils.makeRequest(Utils.makeEventListReq(team)));
+            Object output = Utils.makeRequest(Utils.makeEventListReq(team));
+            System.out.println(output);
         } catch (IOException e) {
             e.printStackTrace();
         }
