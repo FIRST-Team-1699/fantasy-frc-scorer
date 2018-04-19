@@ -9,7 +9,11 @@ import java.io.IOException;
 public class Utils {
 
     public static Object makeRequest(final String reqURL) throws IOException {
-        Request request = new Request.Builder().url(reqURL).build();
+        System.out.println(reqURL);
+        Request request = new Request.Builder()
+                .url(reqURL)
+                .addHeader("X-TBA-Auth-Key", Constants.getInstance().getTBAAuthKey())
+                .build();
 
         Response response = Constants.getInstance().getClient().newCall(request).execute();
         return response.body().string();
@@ -20,7 +24,7 @@ public class Utils {
     }
 
     public static String makeEventListReq(final Team team){
-        String outputString = "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/2018/keys";
+        String outputString = "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/events/2018/keys";
         return outputString;
     }
 
