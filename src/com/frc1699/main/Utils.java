@@ -4,14 +4,14 @@ import com.frc1699.team.Team;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import java.io.IOException;
+
 public class Utils {
 
-    public static Object makeRequest(final String reqURL) {
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
+    public static Object makeRequest(final String reqURL) throws IOException {
+        Request request = new Request.Builder().url(reqURL).build();
 
-        Response response = client.newCall(request).execute();
+        Response response = Constants.getInstance().getClient().newCall(request).execute();
         return response.body().string();
     }
 
