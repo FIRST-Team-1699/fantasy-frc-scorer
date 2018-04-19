@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Team {
 
+    //TODO Add matches for events
+
     private final ArrayList<String> events;
     private final String teamNumber;
 
@@ -25,5 +27,9 @@ public class Team {
         for(String e : events) {
             this.events.add(e);
         }
+    }
+
+    public String getTBARequestID(){
+        return "frc" + teamNumber;
     }
 }
