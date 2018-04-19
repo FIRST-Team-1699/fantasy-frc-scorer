@@ -2,8 +2,10 @@ package com.frc1699.main;
 
 public class Utils {
 
-    public static Object makeRequest(final String reqURL){
-
+    public static Object makeRequest(final String reqURL) throws InvalidURLException {
+        if(reqURL.equals("Bad Req")){
+            throw new InvalidURLException();
+        }
 
         return null;
     }
