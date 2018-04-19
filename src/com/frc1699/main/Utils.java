@@ -20,7 +20,8 @@ public class Utils {
     }
 
     public static String makeMatchListReq(final Team team){
-        return null;
+        String outputString = "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/event/" + team.getTBAEventID() + "/matches";
+        return outputString;
     }
 
     public static String makeEventListReq(final Team team){
@@ -28,7 +29,8 @@ public class Utils {
         return outputString;
     }
 
-    public static String makeMatchReq(final Team team){
-        return null;
+    public static String makeMatchReq(final Team team, final String matchID){
+        String outputString = "https://www.thebluealliance.com/api/v3/match/" + team.getTBAEventID() + "_" + matchID;
+        return outputString;
     }
 }
