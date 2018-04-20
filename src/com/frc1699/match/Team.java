@@ -41,7 +41,7 @@ public class Team {
                 String alliance = getAlliance(m);
                 MatchResults results = m.score_breakdown.get(alliance);
                 if (m.winning_alliance.equals(alliance)) {
-                    totalScore += 6;
+                    totalScore += 3;
                 }
                 if (results.autoQuestRankingPoint) {
                     totalScore += 1;
@@ -58,7 +58,7 @@ public class Team {
 
     private String getAlliance(Match match){
         for(String e : match.alliances.get("red").team_keys) {
-            if(this.teamNumber.equals(e)){
+            if(this.getTBARequestID().equals(e)){
                 return "red";
             }
         }
