@@ -1,17 +1,22 @@
 package com.frc1699.tst;
 
 import com.frc1699.main.Utils;
+import com.frc1699.parser.Parser;
 import com.frc1699.team.Team;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class TBAConnectionTest {
+public class EventParserTest {
 
     public static void main(String[] args){
         Team team = new Team("1699");
         try {
             Object output = Utils.makeRequest(Utils.makeEventListReq(team));
-            System.out.println(output);
+            ArrayList<String > events = Parser.parseEventList((String) output);
+            for(String e : events){
+                System.out.println(e);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
