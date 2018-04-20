@@ -1,4 +1,4 @@
-package com.frc1699.player;
+package com.frc1699.main.player;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.frc1699.team;
+package com.frc1699.match;
 
 import com.frc1699.main.Constants;
 import com.frc1699.main.Utils;
@@ -10,12 +10,9 @@ import java.util.ArrayList;
 
 public class Team {
 
-    //TODO Add matches for events
-
     private final ArrayList<String> events;
     private final String teamNumber;
     private final ArrayList<Match> matches;
-    private final String champEvent;
 
     public Team(final String teamNumber){
         this.teamNumber = teamNumber;
@@ -23,10 +20,10 @@ public class Team {
         this.events = new ArrayList<>();
         try {
             this.events.addAll(Parser.listParser((String) Utils.makeRequest(Utils.makeEventListReq(this))));
+            this.matches.addAll(Parser.parseMatches(Utils.makeMatchListReq(this, this.getChampEvent())));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.champEvent = getChampEvent();
     }
 
     private String getChampEvent(){
@@ -39,7 +36,30 @@ public class Team {
     }
 
     public int scoreMatches(){
-        return 0;
+        int totalScore = 0;
+        for(Match m : this.matches){
+            String alliance = getAlliance(m);
+            MatchResults results = m.score_breakdown.get(alliance);
+            if(m.winning_alliance.equals(alliance)){
+                totalScore += 6;
+            }
+            if(results.autoQuestRankingPoint){
+                totalScore += 1;
+            }
+            if(results.faceTheBossRankingPoint){
+                totalScore += 2;
+            }
+        }
+        return totalScore;
+    }
+
+    private String getAlliance(Match match){
+        for(String e : match.alliances.get("red").team_keys) {
+            if(this.teamNumber == e){
+                return "red";
+            }
+        }
+        return "blue";
     }
 
     public String getTBARequestID(){

@@ -1,6 +1,6 @@
 package com.frc1699.main;
 
-import com.frc1699.team.Team;
+import com.frc1699.match.Team;
 import okhttp3.Request;
 import okhttp3.Response;
 
