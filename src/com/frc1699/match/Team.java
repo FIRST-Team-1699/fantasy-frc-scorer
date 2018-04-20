@@ -50,7 +50,7 @@ public class Team {
                     totalScore += 2;
                 }
             }catch (NullPointerException e){
-                System.out.println("Match not played yet.");
+                System.err.println("Match not played yet.");
             }
         }
         return totalScore;

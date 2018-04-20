@@ -1,4 +1,6 @@
-package com.frc1699.main.player;
+package com.frc1699.main;
+
+import com.frc1699.player.Player;
 
 import java.util.ArrayList;
 
@@ -36,5 +38,9 @@ public class Game {
             }
         }
         return null;
+    }
+
+    public ArrayList<Player> getPlayerList(){
+        return this.playerList;
     }
 }
