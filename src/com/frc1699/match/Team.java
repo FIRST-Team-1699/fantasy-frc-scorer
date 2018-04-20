@@ -2,7 +2,6 @@ package com.frc1699.match;
 
 import com.frc1699.main.Constants;
 import com.frc1699.main.Utils;
-import com.frc1699.match.Match;
 import com.frc1699.parser.Parser;
 
 import java.io.IOException;
@@ -20,7 +19,7 @@ public class Team {
         this.events = new ArrayList<>();
         try {
             this.events.addAll(Parser.listParser((String) Utils.makeRequest(Utils.makeEventListReq(this))));
-            this.matches.addAll(Parser.parseMatches(Utils.makeMatchListReq(this, this.getChampEvent())));
+            this.matches.addAll(Parser.parseMatches((String) Utils.makeRequest(Utils.makeMatchListReq(this, this.getChampEvent()))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,16 +37,20 @@ public class Team {
     public int scoreMatches(){
         int totalScore = 0;
         for(Match m : this.matches){
-            String alliance = getAlliance(m);
-            MatchResults results = m.score_breakdown.get(alliance);
-            if(m.winning_alliance.equals(alliance)){
-                totalScore += 6;
-            }
-            if(results.autoQuestRankingPoint){
-                totalScore += 1;
-            }
-            if(results.faceTheBossRankingPoint){
-                totalScore += 2;
+            try {
+                String alliance = getAlliance(m);
+                MatchResults results = m.score_breakdown.get(alliance);
+                if (m.winning_alliance.equals(alliance)) {
+                    totalScore += 6;
+                }
+                if (results.autoQuestRankingPoint) {
+                    totalScore += 1;
+                }
+                if (results.faceTheBossRankingPoint) {
+                    totalScore += 2;
+                }
+            }catch (NullPointerException e){
+                System.out.println("Match not played yet.");
             }
         }
         return totalScore;
@@ -55,7 +58,7 @@ public class Team {
 
     private String getAlliance(Match match){
         for(String e : match.alliances.get("red").team_keys) {
-            if(this.teamNumber == e){
+            if(this.teamNumber.equals(e)){
                 return "red";
             }
         }
