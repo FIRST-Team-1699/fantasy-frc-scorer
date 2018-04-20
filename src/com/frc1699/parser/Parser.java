@@ -1,12 +1,14 @@
 package com.frc1699.parser;
 
+import com.frc1699.main.Constants;
+import com.frc1699.match.Match;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class Parser {
 
-    public static ArrayList<String> parseEventList(String TBAString){
+    public static ArrayList<String> listParser(String TBAString){
         ArrayList<String> outputList;
 
         TBAString = TBAString.replaceAll("\\[", "");
@@ -17,5 +19,10 @@ public class Parser {
         }
 
         return outputList;
+    }
+
+    public static ArrayList<Match> parseMatches(String JsonData){
+        Match[] matches = Constants.getInstance().getGson().fromJson(JsonData, Match[].class);
+        return new ArrayList<Match>(Arrays.asList(matches));
     }
 }

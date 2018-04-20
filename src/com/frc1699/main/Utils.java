@@ -27,7 +27,11 @@ public class Utils {
         return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/events/2018/keys";
     }
 
-    public static String makeMatchReq(final Team team, final String matchID, final int eventIndex){
-        return "https://www.thebluealliance.com/api/v3/match/" + team.getTBAEventID(eventIndex) + "_" + matchID;
+    public static String makeMatchReq(final String matchID){
+        return "https://www.thebluealliance.com/api/v3/match/" + matchID;
+    }
+
+    public static String makeMatchListRequest(final Team team, final String eventID){
+        return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/event/" + eventID + "/matches/keys";
     }
 }

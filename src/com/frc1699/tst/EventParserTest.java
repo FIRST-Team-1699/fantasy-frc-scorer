@@ -13,7 +13,7 @@ public class EventParserTest {
         Team team = new Team("254");
         try {
             Object output = Utils.makeRequest(Utils.makeEventListReq(team));
-            ArrayList<String > events = Parser.parseEventList((String) output);
+            ArrayList<String > events = Parser.listParser((String) output);
             for(String e : events){
                 System.out.println(e);
             }

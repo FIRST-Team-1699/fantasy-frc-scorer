@@ -1,11 +1,25 @@
 package com.frc1699.match;
 
+import java.util.Map;
+
 public class Match {
 
-    private boolean redBoss, blueBoss, redAuto, blueAuto, redWin, blueWin;
-    private int matchNum, red1, red2, red3, blue1, blue2, blue3;
+    long actual_time;
+    Map<String, Alliance> alliances;
+    String comp_level;
+    String event_key;
+    String key;
+    int match_number;
+    long post_result_time;
+    long predicted_time;
+    Map<String, MatchResults> score_breakdown;
+    int set_number;
+    long time;
+    String[] videos;
+    String winning_alliance;
 
-    public Match(){
-
+    @Override
+    public String toString() {
+        return "" + actual_time + alliances;
     }
 }
