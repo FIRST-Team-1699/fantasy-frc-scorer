@@ -7,16 +7,15 @@ import com.frc1699.team.Team;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class EventParserTest {
+public class MatchParserTest {
 
     public static void main(String[] args){
         Team team = new Team("254");
         try {
             Object output = Utils.makeRequest(Utils.makeEventListReq(team));
             ArrayList<String > events = Parser.parseEventList((String) output);
-            for(String e : events){
-                System.out.println(e);
-            }
+            Object matches = Utils.makeRequest(Utils.makeMatchListReq(team, events.get(2)));
+            System.out.println(matches);
         } catch (IOException e) {
             e.printStackTrace();
         }
