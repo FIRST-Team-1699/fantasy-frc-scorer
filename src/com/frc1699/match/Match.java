@@ -15,7 +15,7 @@ public class Match {
     Map<String, MatchResults> score_breakdown;
     int set_number;
     long time;
-    String[] videos;
+    Video[] videos;
     String winning_alliance;
 
     @Override
