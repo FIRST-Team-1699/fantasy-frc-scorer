@@ -13,8 +13,7 @@ public class Parser {
         TBAString = TBAString.replaceAll("\\]", "");
         outputList = new ArrayList<>(Arrays.asList(TBAString.split(",")));
         for (int i = 0; i < outputList.size(); i++) {
-            outputList.set(i, outputList.get(i).replaceAll("\"", ""));
-            outputList.set(i, outputList.get(i).replaceAll("\n", "").trim());
+            outputList.set(i, outputList.get(i).replaceAll("\"", "").trim());
         }
 
         return outputList;
