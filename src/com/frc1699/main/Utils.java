@@ -20,17 +20,14 @@ public class Utils {
     }
 
     public static String makeMatchListReq(final Team team, final String eventID){
-        String outputString = "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/event/" + eventID + "/matches";
-        return outputString;
+        return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/event/" + eventID + "/matches";
     }
 
     public static String makeEventListReq(final Team team){
-        String outputString = "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/events/2018/keys";
-        return outputString;
+        return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/events/2018/keys";
     }
 
     public static String makeMatchReq(final Team team, final String matchID, final int eventIndex){
-        String outputString = "https://www.thebluealliance.com/api/v3/match/" + team.getTBAEventID(eventIndex) + "_" + matchID;
-        return outputString;
+        return "https://www.thebluealliance.com/api/v3/match/" + team.getTBAEventID(eventIndex) + "_" + matchID;
     }
 }
