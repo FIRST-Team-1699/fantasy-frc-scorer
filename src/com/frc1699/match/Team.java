@@ -39,15 +39,17 @@ public class Team {
         for(Match m : this.matches){
             try {
                 String alliance = getAlliance(m);
-                MatchResults results = m.score_breakdown.get(alliance);
-                if (m.winning_alliance.equals(alliance)) {
-                    totalScore += 3;
-                }
-                if (results.autoQuestRankingPoint) {
-                    totalScore += 1;
-                }
-                if (results.faceTheBossRankingPoint) {
-                    totalScore += 2;
+                if (m.comp_level.equals("qm")) {
+                    MatchResults results = m.score_breakdown.get(alliance);
+                    if (m.winning_alliance.equals(alliance)) {
+                        totalScore += 3;
+                    }
+                    if (results.autoQuestRankingPoint) {
+                        totalScore += 1;
+                    }
+                    if (results.faceTheBossRankingPoint) {
+                        totalScore += 2;
+                    }
                 }
             }catch (NullPointerException e){
                 System.err.println("Match not played yet.");
