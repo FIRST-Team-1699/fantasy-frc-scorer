@@ -33,6 +33,12 @@ public class Constants {
         champGameStrings.add("2018new");
         champGameStrings.add("2018roe");
         champGameStrings.add("2018tur");
+        champGameStrings.add("2018arc");
+        champGameStrings.add("2018cars");
+        champGameStrings.add("2018cur");
+        champGameStrings.add("2018dal");
+        champGameStrings.add("2018dar");
+        champGameStrings.add("2018tes");
 
         this.gson = new Gson();
         this.client = new OkHttpClient();
