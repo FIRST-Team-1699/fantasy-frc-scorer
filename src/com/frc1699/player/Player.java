@@ -2,6 +2,7 @@ package com.frc1699.player;
 
 import com.frc1699.match.Team;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,14 @@ public class Player {
         teamMap = new HashMap<>();
         for(Team e : teams){
             teamMap.put(e, 0);
+        }
+    }
+
+    public Player(final String name, final ArrayList<String> teams){
+        this.name = name;
+        teamMap = new HashMap<>();
+        for(String e : teams){
+            teamMap.put(new Team(e), 0);
         }
     }
 

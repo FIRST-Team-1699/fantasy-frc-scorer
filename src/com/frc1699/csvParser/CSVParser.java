@@ -1,9 +1,11 @@
 package com.frc1699.csvParser;
 
 import com.frc1699.main.Game;
+import com.frc1699.player.Player;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,25 +38,31 @@ public class CSVParser {
     private Game parseCSV(final ArrayList<String> file){
         //Var init
         String[] players;
-        Map<String, ArrayList<Integer>> playerTeamMap = new HashMap<>();
+        Map<String, ArrayList<String>> playerTeamMap = new HashMap<>();
         String playerString = file.get(0).replaceFirst(",", "").trim();
 
         //Parse players
         players = playerString.split(",");
 
-        //Add keys to map
-        for(String player : players){
-            playerTeamMap.put(player, new ArrayList<>());
-        }
-
         //Parse teams
-        int[][] teamList = new int[8][8];
+        String[][] teamList = new String[8][8];
         for(int i = 0; i < 8; i++){
             String lineToParse = file.get(i + 1).substring(2);
-            teamList[i] = parseIntList(lineToParse.split(","));
+            teamList[i] = lineToParse.split(",");
         }
 
-        return null;
+        //Add values to map
+        int index = 0;
+        for(String player : players){
+            playerTeamMap.put(player, new ArrayList<>());
+            playerTeamMap.get(player).addAll((Arrays.asList(teamList[index])));
+            index++;
+        }
+
+        Game output = new Game();
+        playerTeamMap.forEach((k, v) -> output.addPlayer(new Player(k, v)));
+
+        return output;
     }
 
     private int[] parseIntList(String[] list){
