@@ -49,9 +49,8 @@ public class CSVParser {
 
         //Parse teams
         int[][] teamList = new int[8][8];
-        for(int i = 1; i < 9; i++){
-            String lineToParse = file.get(i).substring(2);
-            System.out.println(lineToParse);
+        for(int i = 0; i < 8; i++){
+            String lineToParse = file.get(i + 1).substring(2);
             teamList[i] = parseIntList(lineToParse.split(","));
         }
 
