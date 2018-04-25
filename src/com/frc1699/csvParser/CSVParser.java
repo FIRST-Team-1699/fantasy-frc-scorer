@@ -26,6 +26,7 @@ public class CSVParser {
             while((line = reader.readLine()) != null){
                 file.add(line);
             }
+            reader.close();
         }catch(FileNotFoundException e){
             System.out.println("File not found");
         }catch(IOException e){
