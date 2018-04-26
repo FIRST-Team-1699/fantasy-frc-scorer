@@ -20,6 +20,7 @@ public class Window {
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setLayout(null);
+        frame.setFocusable(false);
     }
 
     public void addButton(final String name, final String text, final ActionListener action, final Rectangle bounds){
@@ -41,8 +42,13 @@ public class Window {
     public void addTextField(final String name, final Rectangle bounds){
         JTextField field = new JTextField();
         field.setBounds(bounds);
+        field.setVisible(true);
         frame.add(field);
         components.put(name, field);
+    }
+
+    public void pack(){
+        frame.pack();
     }
 
     public JFrame getFrame(){
