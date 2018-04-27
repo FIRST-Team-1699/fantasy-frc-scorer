@@ -39,7 +39,14 @@ public class Team {
         for(Match m : this.matches){
             try {
                 String alliance = getAlliance(m);
-                if (m.comp_level.equals("qm")) {
+                boolean surrogateMatch = false;
+                for(String key : m.alliances.get(alliance).surrogate_team_keys){
+                    if(key.equals(getTBARequestID())){
+                        surrogateMatch = true;
+                        break;
+                    }
+                }
+                if (m.comp_level.equals("qm") && !surrogateMatch) {
                     MatchResults results = m.score_breakdown.get(alliance);
                     if (m.winning_alliance.equals(alliance)) {
                         totalScore += 3;
