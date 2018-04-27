@@ -56,7 +56,11 @@ public class CSVParser {
         int index = 0;
         for(String player : players){
             playerTeamMap.put(player, new ArrayList<>());
-            playerTeamMap.get(player).addAll((Arrays.asList(teamList[index])));
+            String[] temp = new String[8];
+            for(int i = 0; i < teamList[0].length; i++) {
+                temp[i] = teamList[i][index];
+            }
+            playerTeamMap.get(player).addAll((Arrays.asList(temp)));
             index++;
         }
 

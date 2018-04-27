@@ -52,4 +52,8 @@ public class Player {
         }
         return totalScore;
     }
+
+    public Map<Team, Integer> getTeamMap(){
+        return this.teamMap;
+    }
 }
