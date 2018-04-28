@@ -57,7 +57,7 @@ public class Window {
         }, new Rectangle(350, 100, 100, 30));
     }
 
-    public void addButton(final String name, final String text, final ActionListener action, final Rectangle bounds){
+    private void addButton(final String name, final String text, final ActionListener action, final Rectangle bounds){
         JButton button = new JButton(text);
         button.setBounds(bounds);
         frame.add(button);
@@ -65,7 +65,7 @@ public class Window {
         components.put(name, button);
     }
 
-    public void addLabel(final String name, final String text, final Rectangle bounds){
+    private void addLabel(final String name, final String text, final Rectangle bounds){
         JLabel label = new JLabel();
         label.setText(text);
         label.setBounds(bounds);
@@ -73,7 +73,7 @@ public class Window {
         components.put(name, label);
     }
 
-    public void addTextField(final String name, final Rectangle bounds){
+    private void addTextField(final String name, final Rectangle bounds){
         JTextField field = new JTextField("");
         field.setBounds(bounds);
         frame.add(field);
@@ -81,11 +81,7 @@ public class Window {
         components.put(name, field);
     }
 
-    public void pack(){
+    private void pack(){
         frame.pack();
-    }
-
-    public JFrame getFrame(){
-        return frame;
     }
 }
