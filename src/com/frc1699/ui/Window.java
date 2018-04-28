@@ -1,8 +1,17 @@
 package com.frc1699.ui;
 
+import com.frc1699.csvParser.CSVParser;
+import com.frc1699.main.Constants;
+import com.frc1699.main.Game;
+import com.frc1699.player.Player;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,9 +27,34 @@ public class Window {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-        frame.setVisible(true);
         frame.setLayout(null);
         frame.setFocusable(false);
+        createLayout();
+        frame.setVisible(true);
+    }
+
+    private void createLayout(){
+        addLabel("CSVSelect", "Select a CSV File:", new Rectangle(20, 20, 100, 30));
+        addButton("FileBrowser", "Browse", e -> {
+            JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            int returnValue = fileChooser.showOpenDialog(null);
+            if(returnValue == JFileChooser.APPROVE_OPTION){
+                File selectedFile = fileChooser.getSelectedFile();
+                Constants.getInstance().setPathToCSV(selectedFile);
+                ((JTextField) components.get("CSVField")).setText(selectedFile.getAbsolutePath());
+            }
+        }, new Rectangle(640, 20, 100, 30));
+        addTextField("CSVField", new Rectangle(130, 20, 500, 30));
+        addLabel("TBAKey", "Enter your TBAAuthKey:", new Rectangle(20, 60, 150, 30));
+        addTextField("TBATextField", new Rectangle(170, 60, 600, 30));
+        addButton("Submit", "Submit", e -> {
+            Constants.getInstance().setTBAAuthKey(((JTextField) components.get("TBATextField")).getText());
+            Game g =  new CSVParser(Constants.getInstance().getPathToCSV().getAbsolutePath()).getGame();
+            for(Player p : g.getPlayerList()){
+                p.update();
+                System.out.println(p.getName() + " : " + p.getScore());
+            }
+        }, new Rectangle(350, 100, 100, 30));
     }
 
     public void addButton(final String name, final String text, final ActionListener action, final Rectangle bounds){
@@ -40,10 +74,10 @@ public class Window {
     }
 
     public void addTextField(final String name, final Rectangle bounds){
-        JTextField field = new JTextField();
+        JTextField field = new JTextField("");
         field.setBounds(bounds);
-        field.setVisible(true);
         frame.add(field);
+        field.setVisible(true);
         components.put(name, field);
     }
 

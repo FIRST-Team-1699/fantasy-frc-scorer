@@ -3,16 +3,18 @@ package com.frc1699.main;
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Constants {
 
     private static Constants instance;
-    private final String TBAAuthKey;
+    private String TBAAuthKey;
     private final OkHttpClient client;
     private final Gson gson;
     private final ArrayList<String> champGameStrings;
+    private File pathToCSV;
 
     public static Constants getInstance(){
         if(instance == null) {
@@ -22,10 +24,6 @@ public class Constants {
     }
 
     private Constants(){
-        Scanner io = new Scanner(System.in);
-        System.out.println("Please enter a TBA auth key: ");
-        this.TBAAuthKey = io.nextLine();
-        System.out.println("Your auth key is: " + this.TBAAuthKey);
         this.champGameStrings = new ArrayList<>();
         champGameStrings.add("2018carv");
         champGameStrings.add("2018gal");
@@ -58,6 +56,18 @@ public class Constants {
 
     public String getTBAAuthKey(){
         return this.TBAAuthKey;
+    }
+
+    public File getPathToCSV(){
+        return pathToCSV;
+    }
+
+    public void setPathToCSV(File file){
+        this.pathToCSV = file;
+    }
+
+    public void setTBAAuthKey(String key){
+        this.TBAAuthKey = key;
     }
 
 }
