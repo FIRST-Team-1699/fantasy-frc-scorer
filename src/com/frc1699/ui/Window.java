@@ -34,7 +34,7 @@ public class Window {
     }
 
     private void createLayout(){
-        addLabel("CSVSelect", "Select a CSV File:", new Rectangle(20, 20, 100, 30));
+        addLabel("CSVSelect", "Select a CSV File:", new Rectangle(20, 20, 150, 30));
         addButton("FileBrowser", "Browse", e -> {
             JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
             int returnValue = fileChooser.showOpenDialog(null);
@@ -52,9 +52,10 @@ public class Window {
             Game g =  new CSVParser(Constants.getInstance().getPathToCSV().getAbsolutePath()).getGame();
             for(Player p : g.getPlayerList()){
                 p.update();
-                System.out.println(p.getName() + " : " + p.getScore());
+                ((JTextArea) components.get("Output")).append(p.getName() + " : " + p.getScore() + "\n");
             }
         }, new Rectangle(350, 100, 100, 30));
+        addTextArea("Output", 20, 20, new Rectangle(50, 150, 700, 400));
     }
 
     private void addButton(final String name, final String text, final ActionListener action, final Rectangle bounds){
@@ -76,6 +77,15 @@ public class Window {
     private void addTextField(final String name, final Rectangle bounds){
         JTextField field = new JTextField("");
         field.setBounds(bounds);
+        frame.add(field);
+        field.setVisible(true);
+        components.put(name, field);
+    }
+
+    private void addTextArea(final String name, final int rows, final int columns, final Rectangle bounds){
+        JTextArea field = new JTextArea(rows, columns);
+        field.setBounds(bounds);
+        field.setEditable(false);
         frame.add(field);
         field.setVisible(true);
         components.put(name, field);
