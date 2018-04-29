@@ -38,31 +38,65 @@ public class Team {
         int totalScore = 0;
         for(Match m : this.matches){
             try {
-                String alliance = getAlliance(m);
-                boolean surrogateMatch = false;
-                for(String key : m.alliances.get(alliance).surrogate_team_keys){
-                    if(key.equals(getTBARequestID())){
-                        surrogateMatch = true;
-                        break;
-                    }
-                }
-                if (m.comp_level.equals("qm") && !surrogateMatch) {
-                    MatchResults results = m.score_breakdown.get(alliance);
-                    if (m.winning_alliance.equals(alliance)) {
-                        totalScore += 3;
-                    }
-                    if (results.autoQuestRankingPoint) {
-                        totalScore += 1;
-                    }
-                    if (results.faceTheBossRankingPoint) {
-                        totalScore += 2;
-                    }
+                if(m.comp_level.equals("qm")){
+                    totalScore += scoreQualMatch(m);
+                }else if(m.comp_level.equals("qf")){
+                    totalScore += scoreQFMatch(m);
+                }else if(m.comp_level.equals("sf")){
+                    totalScore += scoreSFMatch(m);
+                }else if(m.comp_level.equals("f")){
+                    totalScore += scoreFMatch(m);
                 }
             }catch (NullPointerException e){
                 System.err.println("Match not played yet.");
             }
         }
         return totalScore;
+    }
+
+    private int scoreQualMatch(final Match m){
+        int score = 0;
+        String alliance = getAlliance(m);
+        boolean surrogateMatch = false;
+        for(String key : m.alliances.get(alliance).surrogate_team_keys){
+            if(key.equals(getTBARequestID())){
+                surrogateMatch = true;
+                break;
+            }
+        }
+        if (!surrogateMatch) {
+            MatchResults results = m.score_breakdown.get(alliance);
+            if (m.winning_alliance.equals(alliance)) {
+                score += 3;
+            }
+            if (results.autoQuestRankingPoint) {
+                score += 1;
+            }
+            if (results.faceTheBossRankingPoint) {
+                score += 2;
+            }
+        }
+        return score;
+    }
+
+    private int scoreQFMatch(final Match m){
+        return 0;
+    }
+
+    private int scoreSFMatch(final Match m){
+        return 0;
+    }
+
+    private int scoreFMatch(final Match m){
+        return 0;
+    }
+
+    private int scoreEinsteinRRMatch(final Match m){
+        return 0;
+    }
+
+    private int scoreEinsteinFMatch(final Match m){
+        return 0;
     }
 
     private String getAlliance(Match match){
