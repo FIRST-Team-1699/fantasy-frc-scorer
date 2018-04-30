@@ -34,4 +34,8 @@ public class Utils {
     public static String makeMatchListRequest(final Team team, final String eventID){
         return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/event/" + eventID + "/matches/keys";
     }
+
+    public static String makeTeamEventStatusRequest(final String eventID){
+        return "https://www.thebluealliance.com/api/v3/event/" + eventID + "/teams/statuses";
+    }
 }

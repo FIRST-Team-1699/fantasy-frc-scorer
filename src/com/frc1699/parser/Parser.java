@@ -1,5 +1,6 @@
 package com.frc1699.parser;
 
+import com.frc1699.event.Team;
 import com.frc1699.main.Constants;
 import com.frc1699.match.Match;
 
@@ -21,8 +22,13 @@ public class Parser {
         return outputList;
     }
 
-    public static ArrayList<Match> parseMatches(String JsonData){
+    public static ArrayList<Match> parseMatches(String JsonData) {
         Match[] matches = Constants.getInstance().getGson().fromJson(JsonData, Match[].class);
         return new ArrayList<Match>(Arrays.asList(matches));
+    }
+
+    public static ArrayList<Team> parseTeamStatus(String JsonData){
+        Team[] teams = Constants.getInstance().getGson().fromJson(JsonData, Team[].class);
+        return new ArrayList<Team>(Arrays.asList(teams));
     }
 }

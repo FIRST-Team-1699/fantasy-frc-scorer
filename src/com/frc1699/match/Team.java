@@ -51,7 +51,12 @@ public class Team {
                 System.err.println("Match not played yet.");
             }
         }
+        totalScore += scoreAllianceSelection(getChampEvent());
         return totalScore;
+    }
+
+    private int scoreAllianceSelection(String event){
+        return 0;
     }
 
     private int scoreQualMatch(final Match m){
@@ -80,23 +85,38 @@ public class Team {
     }
 
     private int scoreQFMatch(final Match m){
+        if(m.winning_alliance.contains(getTBARequestID())){
+            return 6;
+        }
         return 0;
     }
 
     private int scoreSFMatch(final Match m){
+        if(m.winning_alliance.contains(getTBARequestID())){
+            return 12;
+        }
         return 0;
     }
 
     private int scoreFMatch(final Match m){
-        return 0;
+        if(m.winning_alliance.contains(getTBARequestID())){
+            return 24;
+        }
+        return 18;
     }
 
     private int scoreEinsteinRRMatch(final Match m){
+        if(m.winning_alliance.contains(getTBARequestID())){
+            return 18;
+        }
         return 0;
     }
 
     private int scoreEinsteinFMatch(final Match m){
-        return 0;
+        if(m.winning_alliance.contains(getTBARequestID())){
+            return 60;
+        }
+        return 30;
     }
 
     private String getAlliance(Match match){

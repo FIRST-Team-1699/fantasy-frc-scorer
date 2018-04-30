@@ -15,6 +15,7 @@ public class Constants {
     private final Gson gson;
     private final ArrayList<String> champGameStrings;
     private File pathToCSV;
+    private String year;
 
     public static Constants getInstance(){
         if(instance == null) {
@@ -68,6 +69,14 @@ public class Constants {
 
     public void setTBAAuthKey(String key){
         this.TBAAuthKey = key;
+    }
+
+    public void setYear(String year){
+        this.year = year;
+    }
+
+    public String getYear(){
+        return this.year;
     }
 
 }

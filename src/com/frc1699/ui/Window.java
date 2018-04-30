@@ -34,9 +34,10 @@ public class Window {
     }
 
     private void createLayout(){
+        //CSV File Selection
         addLabel("CSVSelect", "Select a CSV File:", new Rectangle(20, 20, 150, 30));
         addButton("FileBrowser", "Browse", e -> {
-            JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getDefaultDirectory());
             int returnValue = fileChooser.showOpenDialog(null);
             if(returnValue == JFileChooser.APPROVE_OPTION){
                 File selectedFile = fileChooser.getSelectedFile();
@@ -45,8 +46,16 @@ public class Window {
             }
         }, new Rectangle(640, 20, 100, 30));
         addTextField("CSVField", new Rectangle(130, 20, 500, 30));
+
+        //TBA key input
         addLabel("TBAKey", "Enter your TBAAuthKey:", new Rectangle(20, 60, 150, 30));
         addTextField("TBATextField", new Rectangle(170, 60, 600, 30));
+
+        //Enter Data
+        addLabel("Date", "Enter the competition year:", new Rectangle(240, 100, 180, 30));
+        addTextField("DateField", new Rectangle(400, 100, 200, 30));
+
+        //Submit Button
         addButton("Submit", "Submit", e -> {
             Constants.getInstance().setTBAAuthKey(((JTextField) components.get("TBATextField")).getText());
             Game g =  new CSVParser(Constants.getInstance().getPathToCSV().getAbsolutePath()).getGame();
@@ -54,8 +63,11 @@ public class Window {
                 p.update();
                 ((JTextArea) components.get("Output")).append(p.getName() + " : " + p.getScore() + "\n");
             }
-        }, new Rectangle(350, 100, 100, 30));
-        addTextArea("Output", 20, 20, new Rectangle(50, 150, 700, 400));
+            Constants.getInstance().setYear(((JTextField) components.get("DateField")).getText());
+        }, new Rectangle(350, 150, 100, 30));
+
+        //Output
+        addTextArea("Output", 20, 20, new Rectangle(50, 200, 700, 350));
     }
 
     private void addButton(final String name, final String text, final ActionListener action, final Rectangle bounds){
