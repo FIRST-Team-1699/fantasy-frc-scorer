@@ -1,7 +1,12 @@
 package com.frc1699.tst;
 
 import com.frc1699.main.Constants;
+import com.frc1699.main.Utils;
+import com.frc1699.match.Team;
+import com.frc1699.parser.Parser;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class EventStatusTest {
@@ -13,6 +18,12 @@ public class EventStatusTest {
         System.out.println("Your auth key is: " + TBAAuthKey);
 
         Constants.getInstance().setTBAAuthKey(TBAAuthKey);
+        Team poofs = new Team("254");
+        try {
+            Parser.parseTeamStatus((String) Utils.makeRequest(Utils.makeTeamEventStatusRequest(poofs, "2018casj")));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
 }
