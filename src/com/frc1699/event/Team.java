@@ -1,8 +1,8 @@
 package com.frc1699.event;
 
 public class Team {
-    Qual qual;
     Alliance alliance;
+    Qual qual;
     Playoff playoff;
     String alliance_status_str;
     String playoff_status_str;

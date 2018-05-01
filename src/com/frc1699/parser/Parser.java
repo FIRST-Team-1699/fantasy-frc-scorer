@@ -28,7 +28,10 @@ public class Parser {
     }
 
     public static ArrayList<Team> parseTeamStatus(String JsonData){
-        Team[] teams = Constants.getInstance().getGson().fromJson(JsonData, Team[].class);
-        return new ArrayList<Team>(Arrays.asList(teams));
+        Team teams = Constants.getInstance().getGson().fromJson(JsonData, Team.class);
+        //return new ArrayList<Team>(Arrays.asList(teams));
+        ArrayList<Team> ret = new ArrayList<>();
+        ret.add(teams);
+        return ret;
     }
 }

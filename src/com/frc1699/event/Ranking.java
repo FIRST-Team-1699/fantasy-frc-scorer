@@ -6,6 +6,6 @@ public class Ranking {
     double qual_average;
     int rank;
     Record record;
-    int sort_orders;
+    float[] sort_orders;
     String team_key;
 }
