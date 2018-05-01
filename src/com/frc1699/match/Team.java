@@ -49,6 +49,10 @@ public class Team {
                     totalScore += scoreSFMatch(m);
                 }else if(m.comp_level.equals("f")){
                     totalScore += scoreFMatch(m);
+                }else if(isEinsteinKey(m.event_key) && m.comp_level.equals("sf")){
+                    scoreEinsteinRRMatch(m);
+                }else if(isEinsteinKey(m.event_key) && m.comp_level.equals("f")){
+                    scoreEinsteinFMatch(m);
                 }
             }catch (NullPointerException e){
                 System.err.println("Match not played yet.");
@@ -56,6 +60,10 @@ public class Team {
         }
         totalScore += scoreAllianceSelection(getChampEvent());
         return totalScore;
+    }
+
+    private boolean isEinsteinKey(final String eventKey){
+        return eventKey.equals("2018cmptx") ^ eventKey.equals("2018cmpmi");
     }
 
     private int scoreAllianceSelection(String event){
