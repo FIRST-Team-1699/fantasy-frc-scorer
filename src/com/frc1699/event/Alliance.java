@@ -2,7 +2,7 @@ package com.frc1699.event;
 
 public class Alliance {
     String name;
-    int number;
+    public int number;
     Backup backup;
-    int pick;
+    public int pick;
 }

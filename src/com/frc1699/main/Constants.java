@@ -1,5 +1,7 @@
 package com.frc1699.main;
 
+import com.frc1699.match.Team;
+import com.frc1699.parser.Parser;
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 
@@ -16,6 +18,7 @@ public class Constants {
     private final ArrayList<String> champGameStrings;
     private File pathToCSV;
     private String year;
+    private final int[][] allianceSelectionScoringGuide;
 
     public static Constants getInstance(){
         if(instance == null) {
@@ -41,6 +44,22 @@ public class Constants {
 
         this.gson = new Gson();
         this.client = new OkHttpClient();
+
+        //Makes alliance selection scoring guide
+        allianceSelectionScoringGuide = new int[][]{
+                {24, 20, 16, 12},
+                {23, 19, 15, 11},
+                {22, 18, 14, 10},
+                {21, 17, 13, 9},
+                {20, 16, 12, 8},
+                {19, 15, 11, 7},
+                {18, 14, 10, 6},
+                {17, 13, 9, 5}
+        };
+    }
+
+    public int[][] getAllianceSelectionScoringGuide(){
+        return this.allianceSelectionScoringGuide;
     }
 
     public OkHttpClient getClient() {

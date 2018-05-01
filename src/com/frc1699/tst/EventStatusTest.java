@@ -18,9 +18,9 @@ public class EventStatusTest {
         System.out.println("Your auth key is: " + TBAAuthKey);
 
         Constants.getInstance().setTBAAuthKey(TBAAuthKey);
-        Team poofs = new Team("254");
+        com.frc1699.match.Team poofs = new Team("254");
         try {
-            Parser.parseTeamStatus((String) Utils.makeRequest(Utils.makeTeamEventStatusRequest(poofs, "2018casj")));
+            com.frc1699.event.Team team = Parser.parseTeamStatus((String) Utils.makeRequest(Utils.makeTeamEventStatusRequest(poofs, "2018casj")));
         }catch(IOException e){
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package com.frc1699.match;
 
+import com.frc1699.event.Alliance;
 import com.frc1699.main.Constants;
 import com.frc1699.main.Utils;
 import com.frc1699.parser.Parser;
@@ -12,6 +13,7 @@ public class Team {
     private final ArrayList<String> events;
     private final String teamNumber;
     private final ArrayList<Match> matches;
+    private com.frc1699.event.Team team;
 
     public Team(final String teamNumber){
         this.teamNumber = teamNumber;
@@ -20,6 +22,7 @@ public class Team {
         try {
             this.events.addAll(Parser.listParser((String) Utils.makeRequest(Utils.makeEventListReq(this))));
             this.matches.addAll(Parser.parseMatches((String) Utils.makeRequest(Utils.makeMatchListReq(this, this.getChampEvent()))));
+            this.team = Parser.parseTeamStatus((String) Utils.makeRequest(Utils.makeTeamEventStatusRequest(this, this.getChampEvent())));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,7 +59,15 @@ public class Team {
     }
 
     private int scoreAllianceSelection(String event){
-        return 0;
+        try {
+            Alliance alliance = team.alliance;
+            int allianceNum = alliance.number;
+            int pick = alliance.pick;
+            int score = Constants.getInstance().getAllianceSelectionScoringGuide()[allianceNum - 1][pick];
+            return score;
+        }catch (NullPointerException e){
+            return 0;
+        }
     }
 
     private int scoreQualMatch(final Match m){
