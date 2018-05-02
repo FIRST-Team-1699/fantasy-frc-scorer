@@ -1,6 +1,6 @@
 package com.frc1699.event;
 
-public class Record {
+class Record {
     int wins;
     int losses;
     int ties;

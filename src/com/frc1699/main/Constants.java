@@ -1,23 +1,27 @@
 package com.frc1699.main;
 
-import com.frc1699.match.Team;
-import com.frc1699.parser.Parser;
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Constants {
 
     private static Constants instance;
+
+    //Stores Blue Alliance Auth key
     private String TBAAuthKey;
+
     private final OkHttpClient client;
     private final Gson gson;
+
+    //Stores valid event strings for championship fields
     private final ArrayList<String> champGameStrings;
     private File pathToCSV;
     private String year;
+
+    //Stores scores for alliance selection
     private final int[][] allianceSelectionScoringGuide;
 
     public static Constants getInstance(){
@@ -28,6 +32,7 @@ public class Constants {
     }
 
     private Constants(){
+        //Adds event strings to champ event list
         this.champGameStrings = new ArrayList<>();
         champGameStrings.add("2018carv");
         champGameStrings.add("2018gal");

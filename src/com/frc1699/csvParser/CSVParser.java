@@ -3,7 +3,11 @@ package com.frc1699.csvParser;
 import com.frc1699.main.Game;
 import com.frc1699.player.Player;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +21,7 @@ public class CSVParser {
         this.game = parseCSV(loadCSV(filePath));
     }
 
+    //Loads CSV at specified filePath
     private ArrayList<String> loadCSV(final String filePath){
         ArrayList<String> file = new ArrayList<>();
 
@@ -36,6 +41,8 @@ public class CSVParser {
         return file;
     }
 
+    //Takes ArrayList where each index is a line in a CSV file
+    //Returns an instance of Game with players and teams from the CSV file
     private Game parseCSV(final ArrayList<String> file){
         //Var init
         String[] players;
@@ -64,22 +71,13 @@ public class CSVParser {
             index++;
         }
 
+        //Output instance of Game
         Game output = new Game();
+
+        //Adds players to the output instance
         playerTeamMap.forEach((k, v) -> output.addPlayer(new Player(k, v)));
 
         return output;
-    }
-
-    private int[] parseIntList(String[] list){
-        int[] newList = new int[list.length];
-        for(int i = 0; i < list.length; i++){
-            try {
-                newList[i] = Integer.parseInt(list[i]);
-            }catch (NumberFormatException e){
-                System.out.println("Not a valid number.");
-            }
-        }
-        return newList;
     }
 
     public Game getGame(){

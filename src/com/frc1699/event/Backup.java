@@ -1,6 +1,6 @@
 package com.frc1699.event;
 
-public class Backup {
+class Backup {
     String in;
     String out;
 }

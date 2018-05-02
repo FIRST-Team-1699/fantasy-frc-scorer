@@ -19,6 +19,8 @@ public class Team {
         this.teamNumber = teamNumber;
         this.matches = new ArrayList<>();
         this.events = new ArrayList<>();
+
+        //Gets match, event, and team status data from TBA
         try {
             this.events.addAll(Parser.listParser((String) Utils.makeRequest(Utils.makeEventListReq(this))));
             this.matches.addAll(Parser.parseMatches((String) Utils.makeRequest(Utils.makeMatchListReq(this, this.getChampEvent()))));
@@ -28,6 +30,7 @@ public class Team {
         }
     }
 
+    //Gets champ event from event list
     private String getChampEvent(){
         for(String e : this.events){
             if(Constants.getInstance().getChampGameStrings().contains(e)){
@@ -37,6 +40,7 @@ public class Team {
         return "None";
     }
 
+    //Scores matches
     public int scoreMatches(){
         int totalScore = 0;
         for(Match m : this.matches){
@@ -50,9 +54,9 @@ public class Team {
                 }else if(m.comp_level.equals("f")){
                     totalScore += scoreFMatch(m);
                 }else if(isEinsteinKey(m.event_key) && m.comp_level.equals("sf")){
-                    scoreEinsteinRRMatch(m);
+                    totalScore += scoreEinsteinRRMatch(m);
                 }else if(isEinsteinKey(m.event_key) && m.comp_level.equals("f")){
-                    scoreEinsteinFMatch(m);
+                    totalScore += scoreEinsteinFMatch(m);
                 }
             }catch (NullPointerException e){
                 System.err.println("Match not played yet.");
@@ -62,6 +66,7 @@ public class Team {
         return totalScore;
     }
 
+    //Returns true if match string in from Einstein
     private boolean isEinsteinKey(final String eventKey){
         return eventKey.equals("2018cmptx") ^ eventKey.equals("2018cmpmi");
     }
@@ -138,6 +143,7 @@ public class Team {
         return 30;
     }
 
+    //Returns the alliance this team is on
     private String getAlliance(Match match){
         for(String e : match.alliances.get("red").team_keys) {
             if(this.getTBARequestID().equals(e)){

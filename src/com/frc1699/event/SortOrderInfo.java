@@ -1,6 +1,6 @@
 package com.frc1699.event;
 
-public class SortOrderInfo {
+class SortOrderInfo {
     String name;
     int prevision;
 

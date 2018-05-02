@@ -1,6 +1,6 @@
 package com.frc1699.event;
 
-public class Playoff {
+class Playoff {
     String level;
     Record currect_level_record;
     Record record;

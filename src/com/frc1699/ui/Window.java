@@ -4,12 +4,17 @@ import com.frc1699.csvParser.CSVParser;
 import com.frc1699.main.Constants;
 import com.frc1699.main.Game;
 import com.frc1699.player.Player;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileSystemView;
-import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.HashMap;
@@ -24,7 +29,7 @@ public class Window {
         components = new HashMap<>();
         frame = new JFrame(name);
         frame.setSize(width, height);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setLayout(null);
@@ -33,6 +38,7 @@ public class Window {
         frame.setVisible(true);
     }
 
+    //Creates layout for GUI
     private void createLayout(){
         //CSV File Selection
         addLabel("CSVSelect", "Select a CSV File:", new Rectangle(20, 20, 150, 30));
@@ -70,6 +76,7 @@ public class Window {
         addTextArea("Output", 20, 20, new Rectangle(50, 200, 700, 350));
     }
 
+    //Adds a button to the GUI
     private void addButton(final String name, final String text, final ActionListener action, final Rectangle bounds){
         JButton button = new JButton(text);
         button.setBounds(bounds);
@@ -78,6 +85,7 @@ public class Window {
         components.put(name, button);
     }
 
+    //Adds a label to the GUI
     private void addLabel(final String name, final String text, final Rectangle bounds){
         JLabel label = new JLabel();
         label.setText(text);
@@ -86,6 +94,7 @@ public class Window {
         components.put(name, label);
     }
 
+    //Adds a text field to the GUI
     private void addTextField(final String name, final Rectangle bounds){
         JTextField field = new JTextField("");
         field.setBounds(bounds);
@@ -94,6 +103,7 @@ public class Window {
         components.put(name, field);
     }
 
+    //Adds text area to the GUI
     private void addTextArea(final String name, final int rows, final int columns, final Rectangle bounds){
         JTextArea field = new JTextArea(rows, columns);
         field.setBounds(bounds);
@@ -103,6 +113,7 @@ public class Window {
         components.put(name, field);
     }
 
+    //Packs the frame
     private void pack(){
         frame.pack();
     }

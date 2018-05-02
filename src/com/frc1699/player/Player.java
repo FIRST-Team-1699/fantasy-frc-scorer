@@ -27,16 +27,19 @@ public class Player {
         }
     }
 
+    //Get score for team
     public int getScore(String teamNum){
         return teamMap.get(teamNum);
     }
 
+    //Scores teams for this player
     public void update(){
         for(Map.Entry<Team, Integer> e : teamMap.entrySet()){
             updateScore(e.getKey(), e.getKey().scoreMatches());
         }
     }
 
+    //Updates score map
     private void updateScore(Team team, int newScore){
         teamMap.put(team, newScore);
     }
@@ -45,6 +48,7 @@ public class Player {
         return this.name;
     }
 
+    //Gets the total score for this player
     public int getScore(){
         int totalScore = 0;
         for(Map.Entry<Team, Integer> e : teamMap.entrySet()){
