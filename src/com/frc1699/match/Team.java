@@ -14,6 +14,7 @@ public class Team {
     private final String teamNumber;
     private final ArrayList<Match> matches;
     private com.frc1699.event.Team team;
+    private int currentScore;
 
     public Team(final String teamNumber){
         this.teamNumber = teamNumber;
@@ -63,6 +64,7 @@ public class Team {
             }
         }
         totalScore += scoreAllianceSelection(getChampEvent());
+        currentScore = totalScore;
         return totalScore;
     }
 
@@ -153,9 +155,14 @@ public class Team {
         return "blue";
     }
 
+    public int getCurrentScore(){
+        return currentScore;
+    }
+
     public String getTBARequestID(){
         return "frc" + teamNumber;
     }
+
     public String getTBAEventID(int index){
         return events.get(index);
     }

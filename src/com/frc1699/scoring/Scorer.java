@@ -33,7 +33,9 @@ public class Scorer implements Runnable {
     @Override
     public void run() {
         while(running){
-
+            synchronized (scoringQueue){
+                scoringQueue.poll().scoreMatches();
+            }
         }
 
         stop();
