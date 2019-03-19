@@ -70,7 +70,7 @@ public class Team {
 
     //Returns true if match string in from Einstein
     private boolean isEinsteinKey(final String eventKey){
-        return eventKey.equals("2018cmptx") ^ eventKey.equals("2018cmpmi");
+        return eventKey.equals("2019cmptx") ^ eventKey.equals("2019cmpmi");
     }
 
     private int scoreAllianceSelection(String event){
@@ -100,10 +100,10 @@ public class Team {
             if (m.winning_alliance.equals(alliance)) {
                 score += 3;
             }
-            if (results.autoQuestRankingPoint) {
+            if (results.habDockingRankingPoint) {
                 score += 1;
             }
-            if (results.faceTheBossRankingPoint) {
+            if (results.completeRocketRankingPoint) {
                 score += 2;
             }
         }
