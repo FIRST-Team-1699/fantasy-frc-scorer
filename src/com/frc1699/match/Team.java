@@ -78,8 +78,7 @@ public class Team {
             Alliance alliance = team.alliance;
             int allianceNum = alliance.number;
             int pick = alliance.pick;
-            int score = Constants.getInstance().getAllianceSelectionScoringGuide()[allianceNum - 1][pick]; //TODO Update
-            return score;
+            return Constants.getInstance().getAllianceSelectionScoringGuide()[allianceNum - 1][pick];
         }catch (NullPointerException e){
             return 0;
         }
@@ -165,5 +164,10 @@ public class Team {
 
     public String getTBAEventID(int index){
         return events.get(index);
+    }
+
+    @Override
+    public String toString(){
+        return teamNumber;
     }
 }
