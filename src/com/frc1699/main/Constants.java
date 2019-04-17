@@ -34,32 +34,32 @@ public class Constants {
     private Constants(){
         //Adds event strings to champ event list
         this.champGameStrings = new ArrayList<>();
-        champGameStrings.add("2018carv");
-        champGameStrings.add("2018gal");
-        champGameStrings.add("2018hop");
-        champGameStrings.add("2018new");
-        champGameStrings.add("2018roe");
-        champGameStrings.add("2018tur");
-        champGameStrings.add("2018arc");
-        champGameStrings.add("2018cars");
-        champGameStrings.add("2018cur");
-        champGameStrings.add("2018dal");
-        champGameStrings.add("2018dar");
-        champGameStrings.add("2018tes");
+        champGameStrings.add("2019carv");
+        champGameStrings.add("2019gal");
+        champGameStrings.add("2019hop");
+        champGameStrings.add("2019new");
+        champGameStrings.add("2019roe");
+        champGameStrings.add("2019tur");
+        champGameStrings.add("2019arc");
+        champGameStrings.add("2019cars");
+        champGameStrings.add("2019cur");
+        champGameStrings.add("2019dal");
+        champGameStrings.add("2019dar");
+        champGameStrings.add("2019tes");
 
         this.gson = new Gson();
         this.client = new OkHttpClient();
 
         //Makes alliance selection scoring guide
         allianceSelectionScoringGuide = new int[][]{
-                {24, 20, 16, 12},
-                {23, 19, 15, 11},
-                {22, 18, 14, 10},
-                {21, 17, 13, 9},
-                {20, 16, 12, 8},
-                {19, 15, 11, 7},
-                {18, 14, 10, 6},
-                {17, 13, 9, 5}
+                {24, 20, 9, 12},
+                {23, 19, 10, 11},
+                {22, 18, 11, 10},
+                {21, 17, 12, 9},
+                {20, 16, 13, 8},
+                {19, 15, 14, 7},
+                {18, 14, 15, 6},
+                {17, 13, 16, 5}
         };
     }
 

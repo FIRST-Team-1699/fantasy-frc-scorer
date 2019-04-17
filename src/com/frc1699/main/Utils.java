@@ -31,7 +31,7 @@ public class Utils {
     //Used to make the request URL
     //Gets event list for a given team
     public static String makeEventListReq(final Team team){
-        return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/events/2018/keys";
+        return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/events/2019/keys";
     }
 
     //Used to make the request URL

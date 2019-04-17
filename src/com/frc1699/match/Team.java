@@ -78,7 +78,7 @@ public class Team {
             Alliance alliance = team.alliance;
             int allianceNum = alliance.number;
             int pick = alliance.pick;
-            int score = Constants.getInstance().getAllianceSelectionScoringGuide()[allianceNum - 1][pick];
+            int score = Constants.getInstance().getAllianceSelectionScoringGuide()[allianceNum - 1][pick]; //TODO Update
             return score;
         }catch (NullPointerException e){
             return 0;
