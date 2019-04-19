@@ -98,6 +98,9 @@ public class Team {
             MatchResults results = m.score_breakdown.get(alliance);
             if (m.winning_alliance.equals(alliance)) {
                 score += 3;
+            }else if(m.winning_alliance.equals("")){
+                //There is a tie
+                score += 1;
             }
             if (results.habDockingRankingPoint) {
                 score += 1;
