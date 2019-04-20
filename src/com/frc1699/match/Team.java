@@ -48,17 +48,19 @@ public class Team {
             try {
                 if(m.comp_level.equals("qm")){
                     totalScore += scoreQualMatch(m);
-                }else if(m.comp_level.equals("qf")){
-                    totalScore += scoreQFMatch(m);
-                }else if(m.comp_level.equals("sf")){
-                    totalScore += scoreSFMatch(m);
-                }else if(m.comp_level.equals("f")){
-                    totalScore += scoreFMatch(m);
+//                }else if(m.comp_level.equals("qf")){
+//                    totalScore += scoreQFMatch(m);
+//                }else if(m.comp_level.equals("sf")){
+//                    totalScore += scoreSFMatch(m);
+//                }else if(m.comp_level.equals("f")){
+//                    totalScore += scoreFMatch(m);
                 }else if(isEinsteinKey(m.event_key) && m.comp_level.equals("sf")){
                     totalScore += scoreEinsteinRRMatch(m);
-                }else if(isEinsteinKey(m.event_key) && m.comp_level.equals("f")){
-                    totalScore += scoreEinsteinFMatch(m);
+                    System.out.println("Scoring Einstein RR");
                 }
+//                else if(isEinsteinKey(m.event_key) && m.comp_level.equals("f")){
+//                    totalScore += scoreEinsteinFMatch(m);
+//                }
             }catch (NullPointerException e){
                 System.err.println("Match not played yet.");
             }
