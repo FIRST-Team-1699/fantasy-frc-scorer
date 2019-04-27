@@ -18,6 +18,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,8 +67,14 @@ public class Window {
         addButton("Submit", "Submit", e -> {
             Constants.getInstance().setTBAAuthKey(((JTextField) components.get("TBATextField")).getText());
             Game g =  new CSVParser(Constants.getInstance().getPathToCSV().getAbsolutePath()).getGame();
-            for(Player p : g.getPlayerList()){
+            Object[] temp = g.getPlayerList().toArray();
+            Player[] sortedPlayer = new Player[8];
+            System.arraycopy(temp, 0, sortedPlayer, 0, temp.length);
+            for(Player p : sortedPlayer){
                 p.update();
+            }
+            Arrays.sort(sortedPlayer);
+            for(Player p : sortedPlayer){
                 ((JTextArea) components.get("Output")).append(p.getName() + " : " + p.getScore() + "\n");
             }
             Constants.getInstance().setYear(((JTextField) components.get("DateField")).getText());

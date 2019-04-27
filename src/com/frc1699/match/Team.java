@@ -56,7 +56,7 @@ public class Team {
 //                    totalScore += scoreFMatch(m);
                 }else if(isEinsteinKey(m.event_key) && m.comp_level.equals("sf")){
                     totalScore += scoreEinsteinRRMatch(m);
-                    System.out.println("Scoring Einstein RR");
+                    System.out.println("Scoring Einstein RR for team: " + teamNumber);
                 }
 //                else if(isEinsteinKey(m.event_key) && m.comp_level.equals("f")){
 //                    totalScore += scoreEinsteinFMatch(m);

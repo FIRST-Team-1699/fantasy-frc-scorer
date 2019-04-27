@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Player {
+public class Player implements Comparable<Player>{
 
     private final String name;
     private final Map<Team, Integer> teamMap;
@@ -59,5 +59,13 @@ public class Player {
 
     public Map<Team, Integer> getTeamMap(){
         return this.teamMap;
+    }
+
+    @Override
+    public int compareTo(Player p) {
+        if(getScore() == p.getScore()){
+            return 0;
+        }
+        return getScore() > p.getScore() ? -1 : 1;
     }
 }
