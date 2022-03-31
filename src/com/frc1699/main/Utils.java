@@ -15,10 +15,10 @@ public class Utils {
         //Creates request with given URL and adds header with TBAAuthKey
         Request request = new Request.Builder()
                 .url(reqURL)
-                .addHeader("X-TBA-Auth-Key", Constants.getInstance().getTBAAuthKey())
+                .addHeader("X-TBA-Auth-Key", Constants.getTBAAuthKey())
                 .build();
 
-        Response response = Constants.getInstance().getClient().newCall(request).execute();
+        Response response = Constants.getClient().newCall(request).execute();
         return response.body().string();
     }
 

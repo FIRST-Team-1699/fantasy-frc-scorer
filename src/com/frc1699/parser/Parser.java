@@ -30,13 +30,13 @@ public class Parser {
 
     //Parses JSon match data
     public static ArrayList<Match> parseMatches(String JsonData) {
-        Match[] matches = Constants.getInstance().getGson().fromJson(JsonData, Match[].class);
-        return new ArrayList<Match>(Arrays.asList(matches));
+        Match[] matches = Constants.getGson().fromJson(JsonData, Match[].class);
+        return new ArrayList<>(Arrays.asList(matches));
     }
 
     //Parses JSon match status
     public static Team parseTeamStatus(String JsonData){
-        Team team = Constants.getInstance().getGson().fromJson(JsonData, Team.class);
+        Team team = Constants.getGson().fromJson(JsonData, Team.class);
         return team;
     }
 }

@@ -1,7 +1,6 @@
 package com.frc1699.match;
 
 import com.frc1699.event.Alliance;
-import com.frc1699.main.Constants;
 import com.frc1699.main.Utils;
 import com.frc1699.parser.Parser;
 
@@ -20,26 +19,7 @@ public class Team {
         this.teamNumber = teamNumber;
         this.matches = new ArrayList<>();
         this.events = new ArrayList<>();
-
-        //Gets match, event, and team status data from TBA
-        try {
-            this.events.addAll(Parser.listParser((String) Utils.makeRequest(Utils.makeEventListReq(this))));
-            this.matches.addAll(Parser.parseMatches((String) Utils.makeRequest(Utils.makeMatchListReq(this, this.getChampEvent()))));
-            this.team = Parser.parseTeamStatus((String) Utils.makeRequest(Utils.makeTeamEventStatusRequest(this, this.getChampEvent())));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //Gets champ event from event list
-    private String getChampEvent(){
-        for(String e : this.events){
-            if(Constants.getInstance().getChampGameStrings().contains(e)){
-                return e;
-            }
-        }
-        return "None";
-    }
+   }
 
     //Scores matches
     public int scoreMatches(){
@@ -65,7 +45,7 @@ public class Team {
                 System.err.println("Match not played yet.");
             }
         }
-        totalScore += scoreAllianceSelection(getChampEvent());
+//        totalScore += scoreAllianceSelection(getChampEvent());
         currentScore = totalScore;
         return totalScore;
     }
@@ -80,7 +60,8 @@ public class Team {
             Alliance alliance = team.alliance;
             int allianceNum = alliance.number;
             int pick = alliance.pick;
-            return Constants.getInstance().getAllianceSelectionScoringGuide()[allianceNum - 1][pick];
+//            return Constants.getInstance().getAllianceSelectionScoringGuide()[allianceNum - 1][pick];
+            return 0;
         }catch (NullPointerException e){
             return 0;
         }
