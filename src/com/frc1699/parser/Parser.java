@@ -3,9 +3,12 @@ package com.frc1699.parser;
 import com.frc1699.event.Team;
 import com.frc1699.main.Constants;
 import com.frc1699.match.Match;
+import com.frc1699.player.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Parser {
 
@@ -36,7 +39,34 @@ public class Parser {
 
     //Parses JSon match status
     public static Team parseTeamStatus(String JsonData){
-        Team team = Constants.getGson().fromJson(JsonData, Team.class);
-        return team;
+        return Constants.getGson().fromJson(JsonData, Team.class);
+    }
+
+    public static Player[] parsePlayers(String[] input){
+        String[] players = input[0].split(",");
+        final int numPlayers = players.length;
+        final int teamsPerPlayer = input.length - 1;
+
+        Map<String, ArrayList<String>> teamsForPlayer = new HashMap<>();
+        for(String player : players){
+            teamsForPlayer.put(player, new ArrayList<>());
+        }
+
+        for(int i = 0; i < teamsPerPlayer; i++){
+            String line = input[i + 1];
+            String[] splitLine = line.split(",");
+            for(int j = 0; j < splitLine.length; j++){
+                String player = players[i];
+                System.out.println("Adding team " + splitLine[i] + " to player " + player);
+                teamsForPlayer.get(player).add(splitLine[i]);
+            }
+        }
+
+        Player[] playersList = new Player[numPlayers];
+        for(int i  = 0; i < numPlayers; i++){
+            playersList[i] = new Player(players[i], teamsForPlayer.get(players[i]));
+        }
+
+        return playersList;
     }
 }

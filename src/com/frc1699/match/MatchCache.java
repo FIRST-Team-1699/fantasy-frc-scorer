@@ -1,5 +1,9 @@
 package com.frc1699.match;
 
+import com.frc1699.main.Constants;
+import com.frc1699.main.Utils;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,14 +25,18 @@ public class MatchCache {
         matchCache = new HashMap<>();
     }
 
-    public Match getMatch(String matchKey){
-        if(matchCache.containsKey(matchKey)){
-            return matchCache.get(matchKey);
-        }else{
+    public Match getMatch(String matchKey) throws IOException {
+        if (!matchCache.containsKey(matchKey)) {
             //Get match from TBA and put it into the database
-            //TODO Get match from TBA
-            //Return the match
-            return null;
+            matchCache.put(matchKey, retrieveMatchData(matchKey));
         }
+        return matchCache.get(matchKey);
+    }
+
+    private Match retrieveMatchData(final String matchKey) throws IOException {
+        String url = Utils.makeMatchReq(matchKey);
+        Object obj = Utils.makeRequest(url);
+        System.out.println((String) obj);
+        return Constants.getGson().fromJson((String) obj, Match.class);
     }
 }

@@ -11,19 +11,11 @@ public class Player implements Comparable<Player>{
     private final String name;
     private final Map<Team, Integer> teamMap;
 
-    public Player(final String name, final Team[] teams){
-        this.name = name;
-        teamMap = new HashMap<>();
-        for(Team e : teams){
-            teamMap.put(e, 0);
-        }
-    }
-
     public Player(final String name, final ArrayList<String> teams){
         this.name = name;
         teamMap = new HashMap<>();
         for(String e : teams){
-            teamMap.put(new Team(e), 0);
+            teamMap.put(new Team("frc" + e), Integer.parseInt(e));
         }
     }
 
@@ -59,6 +51,13 @@ public class Player implements Comparable<Player>{
 
     public Map<Team, Integer> getTeamMap(){
         return this.teamMap;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                '}';
     }
 
     @Override
