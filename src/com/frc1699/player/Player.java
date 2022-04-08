@@ -27,7 +27,7 @@ public class Player implements Comparable<Player>{
     //Scores teams for this player
     public void update(){
         for(Map.Entry<Team, Integer> e : teamMap.entrySet()){
-            updateScore(e.getKey(), e.getKey().scoreMatches());
+//            updateScore(e.getKey(), e.getKey().scoreMatches());
         }
     }
 

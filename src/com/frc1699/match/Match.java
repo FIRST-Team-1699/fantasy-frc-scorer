@@ -24,40 +24,22 @@ public class Match {
         return "" + actual_time + alliances;
     }
 
-    public int computeScore(String alliance){
+    public int computeScore(String alliance) {
         if(!(alliance.equals("red") || alliance.equals("blue"))){
             throw new IllegalArgumentException("Invalid Alliance Color");
         }
         return switch (comp_level) {
             case "qm" -> scoreQM(alliance);
-            case "ef" -> scoreEF(alliance);
-            case "qf" -> scoreQF(alliance);
-            case "sf" -> scoreSF(alliance);
-            case "f" -> scoreF(alliance);
+            case "ef", "f", "sf", "qf" -> throw new IllegalArgumentException("Attempting to score " + comp_level + " match which should not be done here");
             default -> 0;
         };
     }
 
+    //TODO Change to compute score per team instead of per alliance
     private int scoreQM(String alliance){
         int win = winning_alliance.equals(alliance) ? 4 : 0;
         int cargoRP = score_breakdown.get(alliance).cargoBonusRankingPoint ? 1 : 0;
         int climbRP = score_breakdown.get(alliance).hangarBonusRankingPoint ? 1 : 0;
         return win + cargoRP + climbRP;
-    }
-
-    private int scoreEF(String alliance){
-        return 0;
-    }
-
-    private int scoreQF(String alliance){
-        return 0;
-    }
-
-    private int scoreSF(String alliance){
-        return 0;
-    }
-
-    private int scoreF(String alliance){
-        return 0;
     }
 }

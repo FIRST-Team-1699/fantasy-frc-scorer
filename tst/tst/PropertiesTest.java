@@ -7,7 +7,6 @@ import static org.junit.Assert.assertNotEquals;
 
 public class PropertiesTest {
 
-
     @Test
     public void testLoadProperties(){
         String tbaKey = Constants.getProperties().getProperty("tbakey");

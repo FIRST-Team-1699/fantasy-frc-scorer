@@ -56,9 +56,8 @@ public class Parser {
             String line = input[i + 1];
             String[] splitLine = line.split(",");
             for(int j = 0; j < splitLine.length; j++){
-                String player = players[i];
-                System.out.println("Adding team " + splitLine[i] + " to player " + player);
-                teamsForPlayer.get(player).add(splitLine[i]);
+                String player = players[j];
+                teamsForPlayer.get(player).add(splitLine[j]);
             }
         }
 
