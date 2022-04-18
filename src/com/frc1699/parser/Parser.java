@@ -5,10 +5,9 @@ import com.frc1699.main.Constants;
 import com.frc1699.match.Match;
 import com.frc1699.player.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class Parser {
 
@@ -67,5 +66,15 @@ public class Parser {
         }
 
         return playersList;
+    }
+
+    public static String[] readPickFile(final String filePath) throws FileNotFoundException {
+        List<String> lines = new ArrayList<>();
+        Scanner reader = new Scanner(new File(filePath));
+        while(reader.hasNextLine()){
+            lines.add(reader.nextLine());
+        }
+        reader.close();
+        return lines.toArray(new String[0]);
     }
 }

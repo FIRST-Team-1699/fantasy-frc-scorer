@@ -19,21 +19,12 @@ public class Player implements Comparable<Player>{
         }
     }
 
-    //Get score for team
-    public int getScore(String teamNum){
-        return teamMap.get(teamNum);
-    }
-
-    //Scores teams for this player
-    public void update(){
-        for(Map.Entry<Team, Integer> e : teamMap.entrySet()){
-//            updateScore(e.getKey(), e.getKey().scoreMatches());
+    public double sumQualScore(){
+        double score = 0.0;
+        for(Map.Entry<Team, Integer> team : teamMap.entrySet()){
+            score += team.getKey().getQualScore();
         }
-    }
-
-    //Updates score map
-    private void updateScore(Team team, int newScore){
-        teamMap.put(team, newScore);
+        return score;
     }
 
     public String getName(){

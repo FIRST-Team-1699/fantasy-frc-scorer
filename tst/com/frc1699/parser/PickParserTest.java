@@ -3,6 +3,7 @@ package com.frc1699.parser;
 import com.frc1699.player.Player;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -42,5 +43,15 @@ public class PickParserTest {
         assertTrue(players[0].getTeamMap().containsValue(1718));
         assertTrue(players[0].getTeamMap().containsValue(4678));
         assertTrue(players[0].getTeamMap().containsValue(469));
+    }
+
+    @Test
+    public void testReadFile(){
+        try{
+            String[] lines = Parser.readPickFile("testData/Test_Draft_Data.csv");
+            System.out.println(Arrays.toString(lines));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

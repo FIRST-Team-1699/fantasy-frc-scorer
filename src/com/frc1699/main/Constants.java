@@ -6,12 +6,15 @@ import okhttp3.OkHttpClient;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.Set;
 
 public class Constants {
 
     private static final Properties properties;
     private static final Gson gson;
     private static final OkHttpClient client;
+
+    private static final Set<String> eventsToScore;
 
     static {
         properties = new Properties();
@@ -24,6 +27,8 @@ public class Constants {
 
         gson = new Gson();
         client = new OkHttpClient();
+
+        eventsToScore = Set.of("2022carv", "2022tur", "2022gal", "2022roe", "2022hop", "2022new");
     }
 
     public static Properties getProperties(){
@@ -40,5 +45,9 @@ public class Constants {
 
     public static Gson getGson() {
         return gson;
+    }
+
+    public static boolean checkEventToScore(String event){
+        return eventsToScore.contains(event);
     }
 }
