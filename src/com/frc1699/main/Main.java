@@ -15,6 +15,7 @@ public class Main {
             for (Player p : Utils.sortPlayers(players))  {
                 System.out.printf("%18s -- %.1f\n", p.getName(), p.sumQualScore());
             }
+            System.exit(0);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

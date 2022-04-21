@@ -40,7 +40,13 @@ public class Match {
         if(score_breakdown == null){
             return 0;
         }
-        int win = winning_alliance.equals(alliance) ? 4 : 0;
+        //TODO figure out how to score ties
+        int win;
+        if(winning_alliance.equals("")){
+            win = 2;
+        }else{
+            win = winning_alliance.equals(alliance) ? 4 : 0;
+        }
         int cargoRP = score_breakdown.get(alliance).cargoBonusRankingPoint ? 1 : 0;
         int climbRP = score_breakdown.get(alliance).hangarBonusRankingPoint ? 1 : 0;
         return win + cargoRP + climbRP;
