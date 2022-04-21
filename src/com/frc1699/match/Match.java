@@ -37,6 +37,9 @@ public class Match {
 
     //TODO Change to compute score per team instead of per alliance
     private int scoreQM(String alliance){
+        if(score_breakdown == null){
+            return 0;
+        }
         int win = winning_alliance.equals(alliance) ? 4 : 0;
         int cargoRP = score_breakdown.get(alliance).cargoBonusRankingPoint ? 1 : 0;
         int climbRP = score_breakdown.get(alliance).hangarBonusRankingPoint ? 1 : 0;

@@ -36,11 +36,9 @@ public class Team {
         String[] splitMatches = rawMatches.split(",");
         matches = Arrays.stream(splitMatches).toList();
         matches = matches.stream().filter(Constants::checkEventToScore).collect(Collectors.toList());
-        matches.forEach(System.out::println);
 
         matches.forEach(e -> {
             try{
-                //TODO Determine alliance
                 String alliance = Arrays.stream(MatchCache.getInstance().getMatch(e).alliances.get("red").team_keys).toList().contains(getTBARequestID()) ? "red" : "blue";
                 qualScore += MatchCache.getInstance().getMatch(e).computeScore(alliance);
             } catch(IllegalArgumentException ex){

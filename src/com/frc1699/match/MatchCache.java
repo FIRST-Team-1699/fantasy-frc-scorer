@@ -36,7 +36,6 @@ public class MatchCache {
     private Match retrieveMatchData(final String matchKey) throws IOException {
         String url = Utils.makeMatchReq(matchKey);
         Object obj = Utils.makeRequest(url);
-        System.out.println((String) obj);
         return Constants.getGson().fromJson((String) obj, Match.class);
     }
 }

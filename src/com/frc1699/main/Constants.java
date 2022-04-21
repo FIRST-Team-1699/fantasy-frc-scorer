@@ -47,7 +47,8 @@ public class Constants {
         return gson;
     }
 
-    public static boolean checkEventToScore(String event){
-        return eventsToScore.contains(event);
+    public static boolean checkEventToScore(String match){
+        String[] splitMatchStr = match.split("_");
+        return eventsToScore.contains(splitMatchStr[0]);
     }
 }

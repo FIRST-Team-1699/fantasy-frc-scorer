@@ -47,7 +47,7 @@ public class Utils {
     }
 
     public static String makeMatchListYearRequest(final Team team, final String year){
-        return "http://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/matches/" + year +"/keys";
+        return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/matches/" + year +"/keys";
     }
 
     //Used to make the request URL

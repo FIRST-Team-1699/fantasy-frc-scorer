@@ -9,10 +9,10 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            String[] lines = Parser.readPickFile("testData/Test_Draft_Data.csv");
+            String[] lines = Parser.readPickFile("testData/worlds2022draft.csv");
             Player[] players = Parser.parsePlayers(lines);
             for (Player p : players)  {
-                System.out.printf("%18s -- %f\n", p.getName(), p.sumQualScore());
+                System.out.printf("%18s -- %.1f\n", p.getName(), p.sumQualScore());
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
