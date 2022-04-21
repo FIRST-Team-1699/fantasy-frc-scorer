@@ -16,6 +16,7 @@ public class Team {
 
     private List<String> matches;
     private double qualScore = 0;
+    private int numMatchesPlayed = 0;
 
     public Team(final String teamNumber){
         this.teamNumber = teamNumber;
@@ -41,6 +42,9 @@ public class Team {
             try{
                 String alliance = Arrays.stream(MatchCache.getInstance().getMatch(e).alliances.get("red").team_keys).toList().contains(getTBARequestID()) ? "red" : "blue";
                 qualScore += MatchCache.getInstance().getMatch(e).computeScore(alliance);
+                if(MatchCache.getInstance().getMatch(e).matchPlayed){
+                    numMatchesPlayed++;
+                }
             } catch(IllegalArgumentException ex){
                 qualScore += 0;
             } catch (IOException ex) {
@@ -61,5 +65,9 @@ public class Team {
     @Override
     public String toString(){
         return teamNumber;
+    }
+
+    public int getNumMatchesPlayed(){
+        return numMatchesPlayed;
     }
 }

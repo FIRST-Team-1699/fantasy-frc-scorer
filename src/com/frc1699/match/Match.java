@@ -35,12 +35,13 @@ public class Match {
         };
     }
 
-    //TODO Change to compute score per team instead of per alliance
+
+    boolean matchPlayed = true;
     private int scoreQM(String alliance){
         if(score_breakdown == null){
+            matchPlayed = false;
             return 0;
         }
-        //TODO figure out how to score ties
         int win;
         if(winning_alliance.equals("")){
             win = 2;

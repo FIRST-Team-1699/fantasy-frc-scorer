@@ -27,6 +27,14 @@ public class Player implements Comparable<Player>{
         return score;
     }
 
+    public int sumMatchesPlayed(){
+        int numMatchesPlayed = 0;
+        for(Map.Entry<Team, Integer> team : teamMap.entrySet()){
+            numMatchesPlayed += team.getKey().getNumMatchesPlayed();
+        }
+        return numMatchesPlayed;
+    }
+
     public String getName(){
         return this.name;
     }

@@ -13,7 +13,7 @@ public class Main {
             Player[] players = Parser.parsePlayers(lines);
 
             for (Player p : Utils.sortPlayers(players))  {
-                System.out.printf("%18s -- %.1f\n", p.getName(), p.sumQualScore());
+                System.out.printf("%18s -- %.1f -- %d matches played\n", p.getName(), p.sumQualScore(), p.sumMatchesPlayed());
             }
             System.exit(0);
         } catch (FileNotFoundException e) {
