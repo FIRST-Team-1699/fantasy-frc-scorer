@@ -1,10 +1,12 @@
 package com.frc1699.main;
 
 import com.frc1699.match.Team;
+import com.frc1699.player.Player;
 import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Utils {
 
@@ -54,5 +56,10 @@ public class Utils {
     //Gets team status at given event
     public static String makeTeamEventStatusRequest(final Team team, final String eventID){
         return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/event/" + eventID + "/status";
+    }
+
+    public static Player[] sortPlayers(Player[] players) {
+        Arrays.sort(players);
+        return players;
     }
 }
