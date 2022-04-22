@@ -3,7 +3,10 @@ package com.frc1699.match;
 import com.frc1699.main.Constants;
 import com.frc1699.main.Utils;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,8 +37,26 @@ public class MatchCache {
     }
 
     private Match retrieveMatchData(final String matchKey) throws IOException {
+        //TODO Check if file exists
+        if(Files.exists(new File("tbaData/" + matchKey + ".txt").toPath())){
+            String fileString = Files.readString(new File("tbaData/" + matchKey + ".txt").toPath());
+            return Constants.getGson().fromJson(fileString, Match.class);
+        }
+
         String url = Utils.makeMatchReq(matchKey);
         Object obj = Utils.makeRequest(url);
-        return Constants.getGson().fromJson((String) obj, Match.class);
+        Match match = Constants.getGson().fromJson((String) obj, Match.class);
+
+        try {
+            if(match.score_breakdown != null){
+                FileWriter writer = new FileWriter("tbaData/" + matchKey + ".txt");
+                writer.write((String) obj);
+                writer.close();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return match;
     }
 }
