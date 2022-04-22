@@ -41,7 +41,9 @@ public class Team {
         matches.forEach(e -> {
             try{
                 String alliance = Arrays.stream(MatchCache.getInstance().getMatch(e).alliances.get("red").team_keys).toList().contains(getTBARequestID()) ? "red" : "blue";
-                qualScore += MatchCache.getInstance().getMatch(e).computeScore(alliance);
+                if(!MatchCache.getInstance().getMatch(e).alliances.get(alliance).isSurrogate(this.teamNumber)){
+                    qualScore += MatchCache.getInstance().getMatch(e).computeScore(alliance);
+                }
                 if(MatchCache.getInstance().getMatch(e).matchPlayed){
                     numMatchesPlayed++;
                 }
