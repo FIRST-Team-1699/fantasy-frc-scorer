@@ -1,28 +1,25 @@
 package com.frc1699.main;
 
-import com.frc1699.ui.Window;
+import com.frc1699.parser.Parser;
+import com.frc1699.player.Player;
+
+import java.io.FileNotFoundException;
 
 public class Main {
 
     public static void main(String[] args) {
+        try {
+            String[] lines = Parser.readPickFile("testData/worlds2022draft.csv");
+            Player[] players = Parser.parsePlayers(lines);
 
-        // Code for creating a game without a GUI
-//        Scanner io = new Scanner(System.in);
-//        System.out.println("Please enter a TBA auth key: ");
-//        String TBAAuthKey = io.nextLine();
-//        System.out.println("Your auth key is: " + TBAAuthKey);
-//
-//        Constants.getInstance().setTBAAuthKey(TBAAuthKey);
-//
-//        CSVParser parser = new CSVParser("testData/Detroit_Draft.csv");
-//        Game g =  parser.getGame();
-//
-//        for(Player e : g.getPlayerList()){
-//            e.update();
-//            System.out.println(e.getName() + " : " + e.getScore());
-//        }
-
-        //Code for creating a game with a GUI
-        Window window = new Window(800, 600, "Fantasy FRC");
+            int place = 1;
+            for (Player p : Utils.sortPlayers(players))  {
+                System.out.printf("%d -- %18s -- %.1f points scored -- %d matches played -- %.4f avg points per match\n", place, p.getName(), p.sumQualScore(), p.sumMatchesPlayed(), p.sumQualScore() / (double) p.sumMatchesPlayed());
+                place++;
+            }
+            System.exit(0);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

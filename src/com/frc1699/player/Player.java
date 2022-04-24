@@ -11,37 +11,28 @@ public class Player implements Comparable<Player>{
     private final String name;
     private final Map<Team, Integer> teamMap;
 
-    public Player(final String name, final Team[] teams){
-        this.name = name;
-        teamMap = new HashMap<>();
-        for(Team e : teams){
-            teamMap.put(e, 0);
-        }
-    }
-
     public Player(final String name, final ArrayList<String> teams){
         this.name = name;
         teamMap = new HashMap<>();
         for(String e : teams){
-            teamMap.put(new Team(e), 0);
+            teamMap.put(new Team("frc" + e), Integer.parseInt(e));
         }
     }
 
-    //Get score for team
-    public int getScore(String teamNum){
-        return teamMap.get(teamNum);
-    }
-
-    //Scores teams for this player
-    public void update(){
-        for(Map.Entry<Team, Integer> e : teamMap.entrySet()){
-            updateScore(e.getKey(), e.getKey().scoreMatches());
+    public double sumQualScore(){
+        double score = 0.0;
+        for(Map.Entry<Team, Integer> team : teamMap.entrySet()){
+            score += team.getKey().getQualScore();
         }
+        return score;
     }
 
-    //Updates score map
-    private void updateScore(Team team, int newScore){
-        teamMap.put(team, newScore);
+    public int sumMatchesPlayed(){
+        int numMatchesPlayed = 0;
+        for(Map.Entry<Team, Integer> team : teamMap.entrySet()){
+            numMatchesPlayed += team.getKey().getNumMatchesPlayed();
+        }
+        return numMatchesPlayed;
     }
 
     public String getName(){
@@ -62,10 +53,17 @@ public class Player implements Comparable<Player>{
     }
 
     @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
     public int compareTo(Player p) {
-        if(getScore() == p.getScore()){
+        if(sumQualScore() == p.sumQualScore()){
             return 0;
         }
-        return getScore() > p.getScore() ? -1 : 1;
+        return sumQualScore() > p.sumQualScore() ? -1 : 1;
     }
 }

@@ -1,10 +1,12 @@
 package com.frc1699.main;
 
 import com.frc1699.match.Team;
+import com.frc1699.player.Player;
 import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Utils {
 
@@ -15,10 +17,10 @@ public class Utils {
         //Creates request with given URL and adds header with TBAAuthKey
         Request request = new Request.Builder()
                 .url(reqURL)
-                .addHeader("X-TBA-Auth-Key", Constants.getInstance().getTBAAuthKey())
+                .addHeader("X-TBA-Auth-Key", Constants.getTBAAuthKey())
                 .build();
 
-        Response response = Constants.getInstance().getClient().newCall(request).execute();
+        Response response = Constants.getClient().newCall(request).execute();
         return response.body().string();
     }
 
@@ -46,9 +48,18 @@ public class Utils {
         return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/event/" + eventID + "/matches/keys";
     }
 
+    public static String makeMatchListYearRequest(final Team team, final String year){
+        return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/matches/" + year +"/keys";
+    }
+
     //Used to make the request URL
     //Gets team status at given event
     public static String makeTeamEventStatusRequest(final Team team, final String eventID){
         return "https://www.thebluealliance.com/api/v3/team/" + team.getTBARequestID() + "/event/" + eventID + "/status";
+    }
+
+    public static Player[] sortPlayers(Player[] players) {
+        Arrays.sort(players);
+        return players;
     }
 }

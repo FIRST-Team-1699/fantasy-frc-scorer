@@ -1,178 +1,77 @@
 package com.frc1699.match;
 
-import com.frc1699.event.Alliance;
 import com.frc1699.main.Constants;
 import com.frc1699.main.Utils;
 import com.frc1699.parser.Parser;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Team {
 
-    private final ArrayList<String> events;
     private final String teamNumber;
-    private final ArrayList<Match> matches;
-    private com.frc1699.event.Team team;
-    private int currentScore;
+
+    private List<String> matches;
+    private double qualScore = 0;
+    private int numMatchesPlayed = 0;
 
     public Team(final String teamNumber){
         this.teamNumber = teamNumber;
-        this.matches = new ArrayList<>();
-        this.events = new ArrayList<>();
 
-        //Gets match, event, and team status data from TBA
+        //TODO Need to make eventID dynamic
+        String rawMatches;
         try {
-            this.events.addAll(Parser.listParser((String) Utils.makeRequest(Utils.makeEventListReq(this))));
-            this.matches.addAll(Parser.parseMatches((String) Utils.makeRequest(Utils.makeMatchListReq(this, this.getChampEvent()))));
-            this.team = Parser.parseTeamStatus((String) Utils.makeRequest(Utils.makeTeamEventStatusRequest(this, this.getChampEvent())));
+            rawMatches = (String) Utils.makeRequest(Utils.makeMatchListYearRequest(this, "2022"));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-    }
+        rawMatches = rawMatches.replaceAll("\\[", "");
+        rawMatches = rawMatches.replaceAll("]", "");
+        rawMatches = rawMatches.replaceAll("\n", "");
+        rawMatches = rawMatches.replaceAll(" ", "");
+        rawMatches = rawMatches.replaceAll("\"", "");
 
-    //Gets champ event from event list
-    private String getChampEvent(){
-        for(String e : this.events){
-            if(Constants.getInstance().getChampGameStrings().contains(e)){
-                return e;
-            }
-        }
-        return "None";
-    }
+        String[] splitMatches = rawMatches.split(",");
+        matches = Arrays.stream(splitMatches).toList();
+        matches = matches.stream().filter(Constants::checkEventToScore).collect(Collectors.toList());
 
-    //Scores matches
-    public int scoreMatches(){
-        int totalScore = 0;
-        for(Match m : this.matches){
-            try {
-                if(m.comp_level.equals("qm")){
-                    totalScore += scoreQualMatch(m);
-//                }else if(m.comp_level.equals("qf")){
-//                    totalScore += scoreQFMatch(m);
-//                }else if(m.comp_level.equals("sf")){
-//                    totalScore += scoreSFMatch(m);
-//                }else if(m.comp_level.equals("f")){
-//                    totalScore += scoreFMatch(m);
-                }else if(isEinsteinKey(m.event_key) && m.comp_level.equals("sf")){
-                    totalScore += scoreEinsteinRRMatch(m);
-                    System.out.println("Scoring Einstein RR for team: " + teamNumber);
+        matches.forEach(e -> {
+            try{
+                String alliance = Arrays.stream(MatchCache.getInstance().getMatch(e).alliances.get("red").team_keys).toList().contains(getTBARequestID()) ? "red" : "blue";
+                if(!(MatchCache.getInstance().getMatch(e).alliances.get(alliance).isSurrogate(this.teamNumber) || MatchCache.getInstance().getMatch(e).alliances.get(alliance).isDQed(teamNumber))){
+                    qualScore += MatchCache.getInstance().getMatch(e).computeScore(alliance);
+                }else{
+                    System.out.println("Team " + teamNumber + " was a surrogate or got DQed");
                 }
-//                else if(isEinsteinKey(m.event_key) && m.comp_level.equals("f")){
-//                    totalScore += scoreEinsteinFMatch(m);
-//                }
-            }catch (NullPointerException e){
-                System.err.println("Match not played yet.");
+                if(MatchCache.getInstance().getMatch(e).matchPlayed){
+                    numMatchesPlayed++;
+                }
+            } catch(IllegalArgumentException ex){
+                qualScore += 0;
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-        }
-        totalScore += scoreAllianceSelection(getChampEvent());
-        currentScore = totalScore;
-        return totalScore;
-    }
+        });
+        System.out.println(qualScore);
+   }
 
-    //Returns true if match string in from Einstein
-    private boolean isEinsteinKey(final String eventKey){
-        return eventKey.equals("2019cmptx") ^ eventKey.equals("2019cmpmi");
-    }
-
-    private int scoreAllianceSelection(String event){
-        try {
-            Alliance alliance = team.alliance;
-            int allianceNum = alliance.number;
-            int pick = alliance.pick;
-            return Constants.getInstance().getAllianceSelectionScoringGuide()[allianceNum - 1][pick];
-        }catch (NullPointerException e){
-            return 0;
-        }
-    }
-
-    private int scoreQualMatch(final Match m){
-        int score = 0;
-        String alliance = getAlliance(m);
-        boolean surrogateMatch = false;
-        for(String key : m.alliances.get(alliance).surrogate_team_keys){
-            if(key.equals(getTBARequestID())){
-                surrogateMatch = true;
-                break;
-            }
-        }
-        if (!surrogateMatch) {
-            MatchResults results = m.score_breakdown.get(alliance);
-            if (m.winning_alliance.equals(alliance)) {
-                score += 3;
-            }else if(m.winning_alliance.equals("")){
-                //There is a tie
-                score += 1;
-            }
-            if (results.habDockingRankingPoint) {
-                score += 1;
-            }
-            if (results.completeRocketRankingPoint) {
-                score += 2;
-            }
-        }
-        return score;
-    }
-
-    private int scoreQFMatch(final Match m){
-        if(m.winning_alliance.contains(getTBARequestID())){
-            return 6;
-        }
-        return 0;
-    }
-
-    private int scoreSFMatch(final Match m){
-        if(m.winning_alliance.contains(getTBARequestID())){
-            return 12;
-        }
-        return 0;
-    }
-
-    private int scoreFMatch(final Match m){
-        if(m.winning_alliance.contains(getTBARequestID())){
-            return 24;
-        }
-        return 18;
-    }
-
-    private int scoreEinsteinRRMatch(final Match m){
-        if(m.winning_alliance.contains(getTBARequestID())){
-            return 18;
-        }
-        return 0;
-    }
-
-    private int scoreEinsteinFMatch(final Match m){
-        if(m.winning_alliance.contains(getTBARequestID())){
-            return 60;
-        }
-        return 30;
-    }
-
-    //Returns the alliance this team is on
-    private String getAlliance(Match match){
-        for(String e : match.alliances.get("red").team_keys) {
-            if(this.getTBARequestID().equals(e)){
-                return "red";
-            }
-        }
-        return "blue";
-    }
-
-    public int getCurrentScore(){
-        return currentScore;
-    }
+   public double getQualScore(){
+        return qualScore;
+   }
 
     public String getTBARequestID(){
-        return "frc" + teamNumber;
-    }
-
-    public String getTBAEventID(int index){
-        return events.get(index);
+        return teamNumber;
     }
 
     @Override
     public String toString(){
         return teamNumber;
+    }
+
+    public int getNumMatchesPlayed(){
+        return numMatchesPlayed;
     }
 }
