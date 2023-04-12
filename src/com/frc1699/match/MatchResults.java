@@ -1,44 +1,48 @@
 package com.frc1699.match;
 
+import java.util.Map;
+
 public class MatchResults {
-   int adjustPoints;
-   int autoCargoLowerBlue;
-   int autoCargoLowerFar;
-   int autoCargoLowerNear;
-   int autoCargoLowerRed;
-   int autoCargoPoints;
-   int autoCargoTotal;
-   int autoCargoUpperBlue;
-   int autoCargoUpperFar;
-   int autoCargoUpperNear;
-   int autoCargoUpperRed;
+   boolean activationBonusAchieved;
+   int adjustedPoints;
+   String autoBridgeState;
+   int autoChargeStationPoints;
+   String autoChargeStationRobot1;
+   String autoChargeStationRobot2;
+   String autoChargeStationRobot3;
+   Map<String, String[]> autoCommunity;
+   boolean autoDocked;
+   int autoGamePieceCount;
+   int autoGamePiecePoints;
+   int autoMobilityPoints;
    int autoPoints;
-   int autoTaxiPoints;
-   boolean cargoBonusRankingPoint;
-   int endgamePoints;
-   String endgameRobot1;
-   String endgameRobot2;
-   String endgameRobot3;
+   int coopGamePieceCount;
+   boolean coopertitionCriteriaMet;
+   String endGameBridgeState;
+   int endGameChargeStationPoints;
+   String endGameChargeStationRobot1;
+   String endGameChargeStationRobot2;
+   String endGameChargeStationRobot3;
+   int endGameParkPoints;
    int foulCount;
    int foulPoints;
-   boolean hangarBonusRankingPoint;
-   int matchCargoTotal;
-   boolean quintetAchieved;
+   int linkPoints;
+   Link[] links;
+   String mobilityRobot1;
+   String mobilityRobot2;
+   String mobilityRobot3;
    int rp;
-   String taxiRobot1;
-   String taxiRobot2;
-   String taxiRobot3;
+   boolean sustainabilityBonusAchieved;
    int techFoulCount;
-   int teleopCargoLowerBlue;
-   int teleopCargoLowerFar;
-   int teleopCargoLowerNear;
-   int teleopCargoLowerRed;
-   int teleopCargoPoints;
-   int teleopCargoTotal;
-   int teleopCargoUpperBlue;
-   int teleopCargoUpperFar;
-   int teleopCargoUpperNear;
-   int teleopCargoUpperRed;
+   Map<String, String[]> teleopCommunity;
+   int teleopGamePieceCount;
+   int teleopGamePiecePoints;
    int teleopPoints;
+   int totalChargeStationPoints;
    int totalPoints;
+
+   public static class Link{
+      public int[] nodes;
+      public String row;
+   }
 }

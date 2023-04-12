@@ -48,8 +48,8 @@ public class Match {
         }else{
             win = winning_alliance.equals(alliance) ? 4 : 0;
         }
-        int cargoRP = score_breakdown.get(alliance).cargoBonusRankingPoint ? 1 : 0;
-        int climbRP = score_breakdown.get(alliance).hangarBonusRankingPoint ? 1 : 0;
+        int cargoRP = score_breakdown.get(alliance).activationBonusAchieved ? 1 : 0;
+        int climbRP = score_breakdown.get(alliance).sustainabilityBonusAchieved ? 1 : 0;
         return win + cargoRP + climbRP;
     }
 }
