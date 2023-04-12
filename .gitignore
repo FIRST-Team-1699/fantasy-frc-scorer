@@ -24,3 +24,5 @@ hs_err_pid*
 /.idea/
 /out/
 src/config.properties
+rsc/config.properties
+*.properties
