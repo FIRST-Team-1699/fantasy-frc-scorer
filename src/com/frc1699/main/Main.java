@@ -8,8 +8,20 @@ import java.io.FileNotFoundException;
 public class Main {
 
     public static void main(String[] args) {
+        System.out.println("=================================================================");
+        System.out.println("============================ GROUP 1 ============================");
+        System.out.println("=================================================================");
+        runScorer("testData/worlds2023draft.csv");
+
+        System.out.println("=================================================================");
+        System.out.println("============================ GROUP 2 ============================");
+        System.out.println("=================================================================");
+        runScorer("testData/worlds2022draft.csv");
+    }
+
+    private static void runScorer(final String file) {
         try {
-            String[] lines = Parser.readPickFile("testData/worlds2022draft.csv");
+            String[] lines = Parser.readPickFile(file);
             Player[] players = Parser.parsePlayers(lines);
 
             int place = 1;

@@ -29,7 +29,7 @@ public class Constants {
         gson = new Gson();
         client = new OkHttpClient();
 
-        eventsToScore = Set.of("2023carv", "2023tur", "2023gal", "2023roe", "2023hop", "2023new");
+        eventsToScore = Set.of("2023arc", "2023cur", "2023dal", "2023gal", "2023hop", "2023joh", "2023mil", "2023new");
     }
 
     public static Properties getProperties(){
