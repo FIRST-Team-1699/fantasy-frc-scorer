@@ -24,7 +24,7 @@ public class Team {
         //TODO Need to make eventID dynamic
         String rawMatches;
         try {
-            rawMatches = (String) Utils.makeRequest(Utils.makeMatchListYearRequest(this, "2022"));
+            rawMatches = (String) Utils.makeRequest(Utils.makeMatchListYearRequest(this, "2023"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

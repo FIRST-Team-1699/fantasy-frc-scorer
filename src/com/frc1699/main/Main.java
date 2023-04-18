@@ -11,12 +11,13 @@ public class Main {
         System.out.println("=================================================================");
         System.out.println("============================ GROUP 1 ============================");
         System.out.println("=================================================================");
-        runScorer("testData/worlds2023draft.csv");
+        runScorer("testData/group1Draft.csv");
 
         System.out.println("=================================================================");
         System.out.println("============================ GROUP 2 ============================");
         System.out.println("=================================================================");
-        runScorer("testData/worlds2022draft.csv");
+        runScorer("testData/group2Draft.csv");
+        System.exit(0);
     }
 
     private static void runScorer(final String file) {
@@ -29,7 +30,6 @@ public class Main {
                 System.out.printf("%d -- %18s -- %.1f points scored -- %d matches played -- %.4f avg points per match\n", place, p.getName(), p.sumQualScore(), p.sumMatchesPlayed(), p.sumQualScore() / (double) p.sumMatchesPlayed());
                 place++;
             }
-            System.exit(0);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
