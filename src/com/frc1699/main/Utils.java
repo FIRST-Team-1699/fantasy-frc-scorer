@@ -12,7 +12,7 @@ public class Utils {
 
     //Makes HTTP request to TBA
     public static Object makeRequest(final String reqURL) throws IOException {
-        System.out.println(reqURL);
+//        System.out.println(reqURL);
 
         //Creates request with given URL and adds header with TBAAuthKey
         Request request = new Request.Builder()

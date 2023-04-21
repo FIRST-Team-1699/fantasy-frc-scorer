@@ -43,9 +43,10 @@ public class Team {
                 String alliance = Arrays.stream(MatchCache.getInstance().getMatch(e).alliances.get("red").team_keys).toList().contains(getTBARequestID()) ? "red" : "blue";
                 if(!(MatchCache.getInstance().getMatch(e).alliances.get(alliance).isSurrogate(this.teamNumber) || MatchCache.getInstance().getMatch(e).alliances.get(alliance).isDQed(teamNumber))){
                     qualScore += MatchCache.getInstance().getMatch(e).computeScore(alliance);
-                }else{
-                    System.out.println("Team " + teamNumber + " was a surrogate or got DQed");
                 }
+//                else{
+//                    System.out.println("Team " + teamNumber + " was a surrogate or got DQed");
+//                }
                 if(MatchCache.getInstance().getMatch(e).matchPlayed){
                     numMatchesPlayed++;
                 }
@@ -55,7 +56,7 @@ public class Team {
                 ex.printStackTrace();
             }
         });
-        System.out.println(qualScore);
+//        System.out.println(qualScore);
    }
 
    public double getQualScore(){

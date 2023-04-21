@@ -61,9 +61,9 @@ public class Player implements Comparable<Player>{
 
     @Override
     public int compareTo(Player p) {
-        if(sumQualScore() == p.sumQualScore()){
+        if(sumQualScore() / (double) sumMatchesPlayed() == p.sumQualScore() / (double) p.sumMatchesPlayed()){
             return 0;
         }
-        return sumQualScore() > p.sumQualScore() ? -1 : 1;
+        return sumQualScore() / (double) sumMatchesPlayed() > p.sumQualScore() / (double) p.sumMatchesPlayed() ? -1 : 1;
     }
 }
