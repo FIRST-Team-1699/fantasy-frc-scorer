@@ -350,6 +350,15 @@
   },
   "set_number": 1,
   "time": 1681999080,
-  "videos": [],
+  "videos": [
+    {
+      "key": "_KBx_g2x_qg",
+      "type": "youtube"
+    },
+    {
+      "key": "OtO-AvtfEos",
+      "type": "youtube"
+    }
+  ],
   "winning_alliance": "blue"
 }

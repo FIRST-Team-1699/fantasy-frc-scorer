@@ -26,7 +26,7 @@
   "event_key": "2023arc",
   "key": "2023arc_qm39",
   "match_number": 39,
-  "post_result_time": 1682020639,
+  "post_result_time": 1682034622,
   "predicted_time": 1682020518,
   "score_breakdown": {
     "blue": {
@@ -335,6 +335,10 @@
   "set_number": 1,
   "time": 1682018940,
   "videos": [
+    {
+      "key": "IRUKwvdpdXY",
+      "type": "youtube"
+    },
     {
       "key": "tScCarEO8ak",
       "type": "youtube"

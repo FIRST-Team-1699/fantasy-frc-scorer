@@ -334,6 +334,15 @@
   },
   "set_number": 1,
   "time": 1681998660,
-  "videos": [],
+  "videos": [
+    {
+      "key": "O-G0u_yFl_A",
+      "type": "youtube"
+    },
+    {
+      "key": "Nd2NVsKLAU0",
+      "type": "youtube"
+    }
+  ],
   "winning_alliance": "red"
 }

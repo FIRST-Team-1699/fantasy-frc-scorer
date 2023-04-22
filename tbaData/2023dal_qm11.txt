@@ -326,6 +326,11 @@
   },
   "set_number": 1,
   "time": 1682001600,
-  "videos": [],
+  "videos": [
+    {
+      "key": "yj0bP3ihJR0",
+      "type": "youtube"
+    }
+  ],
   "winning_alliance": "blue"
 }

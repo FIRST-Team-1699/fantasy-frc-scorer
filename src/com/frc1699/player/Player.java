@@ -20,8 +20,10 @@ public class Player implements Comparable<Player>{
     }
 
     public double sumQualScore(){
+        System.out.println("-------- Summing score for " + this.name + " --------");
         double score = 0.0;
         for(Map.Entry<Team, Integer> team : teamMap.entrySet()){
+            System.out.println("\tScoring team " + team.getKey().toString());
             score += team.getKey().getQualScore();
         }
         return score;

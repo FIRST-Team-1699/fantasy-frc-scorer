@@ -354,6 +354,10 @@
     {
       "key": "837My3MY6Vs",
       "type": "youtube"
+    },
+    {
+      "key": "Qd8DggsygPk",
+      "type": "youtube"
     }
   ],
   "winning_alliance": "blue"

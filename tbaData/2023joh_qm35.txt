@@ -370,6 +370,10 @@
     {
       "key": "jz1DvrGc9hc",
       "type": "youtube"
+    },
+    {
+      "key": "chm6horFMng",
+      "type": "youtube"
     }
   ],
   "winning_alliance": "red"
