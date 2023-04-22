@@ -41,13 +41,16 @@ public class Team {
         matches.forEach(e -> {
             try{
                 String alliance = Arrays.stream(MatchCache.getInstance().getMatch(e).alliances.get("red").team_keys).toList().contains(getTBARequestID()) ? "red" : "blue";
-                if(!(MatchCache.getInstance().getMatch(e).alliances.get(alliance).isSurrogate(this.teamNumber) || MatchCache.getInstance().getMatch(e).alliances.get(alliance).isDQed(teamNumber))){
+                boolean scoreMatch = !MatchCache.getInstance().getMatch(e).alliances.get(alliance).isSurrogate(this.teamNumber) && !MatchCache.getInstance().getMatch(e).alliances.get(alliance).isDQed(teamNumber);
+                if(scoreMatch){
                     qualScore += MatchCache.getInstance().getMatch(e).computeScore(alliance);
-                    System.out.printf("Team %s played match %s and scored %d\n", this, e, MatchCache.getInstance().getMatch(e).computeScore(alliance));
-                }else{
-                    System.out.println("Team " + teamNumber + " was a surrogate or got DQed");
+//                    System.out.printf("Team %s played match %s and scored %d\n", this, e, MatchCache.getInstance().getMatch(e).computeScore(alliance));
                 }
-                if(MatchCache.getInstance().getMatch(e).matchPlayed){
+//                else{
+//                    System.out.println("======== Team " + teamNumber + " was a surrogate or got DQed ========");
+//                }
+                // TODO This is the bug
+                if(MatchCache.getInstance().getMatch(e).matchPlayed && scoreMatch){
                     numMatchesPlayed++;
                 }
             } catch(IllegalArgumentException ex){

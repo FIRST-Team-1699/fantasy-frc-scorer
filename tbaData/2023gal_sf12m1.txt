@@ -1,24 +1,24 @@
 {
-  "actual_time": null,
+  "actual_time": 1682178590,
   "alliances": {
     "blue": {
       "dq_team_keys": [],
-      "score": -1,
+      "score": 175,
       "surrogate_team_keys": [],
       "team_keys": [
         "frc1591",
-        "frc3539",
+        "frc2714",
         "frc4481"
       ]
     },
     "red": {
       "dq_team_keys": [],
-      "score": -1,
+      "score": 182,
       "surrogate_team_keys": [],
       "team_keys": [
-        "frc8033",
-        "frc7197",
-        "frc1690"
+        "frc2630",
+        "frc1690",
+        "frc8033"
       ]
     }
   },
@@ -26,8 +26,8 @@
   "event_key": "2023gal",
   "key": "2023gal_sf12m1",
   "match_number": 1,
-  "post_result_time": null,
-  "predicted_time": 1682178663,
+  "post_result_time": 1682178774,
+  "predicted_time": 1682178758,
   "score_breakdown": {
     "blue": {
       "activationBonusAchieved": false,

@@ -26,7 +26,7 @@
   "event_key": "2023hop",
   "key": "2023hop_sf13m1",
   "match_number": 1,
-  "post_result_time": null,
+  "post_result_time": 1682178961,
   "predicted_time": 1682178782,
   "score_breakdown": {
     "blue": {
@@ -398,6 +398,11 @@
   },
   "set_number": 13,
   "time": 1682177580,
-  "videos": [],
+  "videos": [
+    {
+      "key": "YB1aYvXxHX0",
+      "type": "youtube"
+    }
+  ],
   "winning_alliance": "blue"
 }

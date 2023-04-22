@@ -26,7 +26,7 @@
   "event_key": "2023dal",
   "key": "2023dal_sf12m1",
   "match_number": 1,
-  "post_result_time": null,
+  "post_result_time": 1682179313,
   "predicted_time": 1682179202,
   "score_breakdown": {
     "blue": {
@@ -390,6 +390,11 @@
   },
   "set_number": 12,
   "time": 1682176380,
-  "videos": [],
+  "videos": [
+    {
+      "key": "6pJ3dCoF3s0",
+      "type": "youtube"
+    }
+  ],
   "winning_alliance": "blue"
 }
